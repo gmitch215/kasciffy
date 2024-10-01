@@ -3,6 +3,8 @@ plugins {
     id("com.android.library")
 }
 
+description = "Core API for Kasciffy"
+
 kotlin {
     jvm()
 
