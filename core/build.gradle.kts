@@ -1,12 +1,37 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("org.jetbrains.dokka")
 }
 
 description = "Core API for Kasciffy"
 
 kotlin {
     jvm()
+    js {
+        browser {
+            testTask {
+                enabled = false
+            }
+
+            binaries.executable()
+        }
+        nodejs()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser {
+            testTask {
+                enabled = false
+            }
+
+            binaries.executable()
+        }
+        nodejs()
+    }
 
     mingwX64()
     linuxX64()
@@ -17,9 +42,18 @@ kotlin {
     androidTarget {
         publishAllLibraryVariants()
     }
+    androidNativeArm32()
+    androidNativeArm64()
+    androidNativeX64()
+    androidNativeX86()
+
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+    watchosX64()
+    watchosArm32()
+    watchosArm64()
+    watchosDeviceArm64()
 }
 
 android {
@@ -29,5 +63,27 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+tasks {
+    clean {
+        delete("kotlin-js-store")
+    }
+
+    create("jvmJacocoTestReport", JacocoReport::class) {
+        dependsOn("jvmTest")
+
+        classDirectories.setFrom(layout.buildDirectory.file("classes/kotlin/jvm/"))
+        sourceDirectories.setFrom("src/commonMain/kotlin/", "src/jvmMain/kotlin/")
+        executionData.setFrom(layout.buildDirectory.files("jacoco/jvmTest.exec"))
+
+        reports {
+            xml.required.set(true)
+            xml.outputLocation.set(layout.buildDirectory.file("jacoco.xml"))
+
+            html.required.set(true)
+            html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+        }
     }
 }
