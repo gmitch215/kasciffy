@@ -6,7 +6,7 @@ if [ ! -d "docs" ]; then
   mkdir docs
 fi;
 
-cp -Rfv build/dokka/html/* ./docs/
+cp -Rfv core/build/dokka/html/* ./docs/
 
 git switch -f gh-pages
 
