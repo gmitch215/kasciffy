@@ -74,8 +74,6 @@ jobs:
           cache: 'gradle'
       - name: Change Permissions
         run: chmod +x ./gradlew
-      - name: Install Firefox
-        uses: browser-actions/setup-firefox@v1
       - name: Gradle Test
         run: ./gradlew allTests jvmJacocoTestReport
       - name: Collect JaCoCo Report
