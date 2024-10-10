@@ -5,7 +5,14 @@ plugins {
 }
 
 kotlin {
-    jvm()
+    jvm {
+        compilations.all {
+            compileJavaTaskProvider?.configure {
+                sourceCompatibility = "21"
+                targetCompatibility = "21"
+            }
+        }
+    }
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {

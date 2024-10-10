@@ -4,12 +4,21 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jetbrains.dokka")
+
+    `maven-publish`
 }
 
 description = "Core API for Kasciffy"
 
 kotlin {
-    jvm()
+    jvm {
+        compilations.all {
+            compileJavaTaskProvider?.configure {
+                sourceCompatibility = "1.8"
+                targetCompatibility = "1.8"
+            }
+        }
+    }
     js {
         browser {
             testTask {
@@ -66,6 +75,12 @@ android {
     }
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
+}
+
 tasks {
     clean {
         delete("kotlin-js-store")
@@ -84,6 +99,27 @@ tasks {
 
             html.required.set(true)
             html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+        }
+    }
+}
+
+publishing {
+    publications {
+        filterIsInstance<MavenPublication>().forEach { pub ->
+            pub.pom {
+                licenses {
+                    license {
+                        name = "MIT License"
+                        url = "https://opensource.org/licenses/MIT"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git://github.com/gmitch215/kasciffy.git"
+                    developerConnection = "scm:git:ssh://github.com/gmitch215/kasciffy.git"
+                    url = "https://github.com/gmitch215/kasciffy"
+                }
+            }
         }
     }
 }

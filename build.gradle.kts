@@ -8,8 +8,6 @@ plugins {
 }
 
 allprojects {
-    apply(plugin = "maven-publish")
-
     group = "xyz.gmitch215.kasciffy"
     version = "0.1.0"
     description = "Asciffy images and videos"
@@ -18,26 +16,5 @@ allprojects {
         mavenCentral()
         mavenLocal()
         google()
-    }
-
-    publishing {
-        publications {
-            filterIsInstance<MavenPublication>().forEach { pub ->
-                pub.pom {
-                    licenses {
-                        license {
-                            name = "MIT License"
-                            url = "https://opensource.org/licenses/MIT"
-                        }
-                    }
-
-                    scm {
-                        connection = "scm:git:git://github.com/gmitch215/kasciffy.git"
-                        developerConnection = "scm:git:ssh://github.com/gmitch215/kasciffy.git"
-                        url = "https://github.com/gmitch215/kasciffy"
-                    }
-                }
-            }
-        }
     }
 }
