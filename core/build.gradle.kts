@@ -14,8 +14,8 @@ kotlin {
     jvm {
         compilations.all {
             compileJavaTaskProvider?.configure {
-                sourceCompatibility = "1.8"
-                targetCompatibility = "1.8"
+                sourceCompatibility = "21"
+                targetCompatibility = "21"
             }
         }
     }
@@ -70,14 +70,14 @@ android {
     namespace = "xyz.gmitch215.kasciffy"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 

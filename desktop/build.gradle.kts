@@ -5,14 +5,7 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        compilations.all {
-            compileJavaTaskProvider?.configure {
-                sourceCompatibility = "21"
-                targetCompatibility = "21"
-            }
-        }
-    }
+    jvm()
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
@@ -31,11 +24,5 @@ kotlin {
                 implementation(project(":kasciffy-core"))
             }
         }
-    }
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
