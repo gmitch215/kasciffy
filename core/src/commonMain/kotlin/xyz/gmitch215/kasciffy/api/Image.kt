@@ -34,8 +34,8 @@ interface Image : Media {
      * @return The red portion from the RGBA pixel color
      */
     fun red(x: Int, y: Int): Int {
-        // TODO
-        return 0
+        val pixel = get(x, y)
+        return (pixel shr 24) and 0xFF
     }
 
     /**
@@ -45,8 +45,8 @@ interface Image : Media {
      * @return The blue portion from the RGBA pixel color
      */
     fun blue(x: Int, y: Int): Int {
-        // TODO
-        return 0
+        val pixel = get(x, y)
+        return (pixel shr 16) and 0xFF
     }
 
     /**
@@ -56,8 +56,8 @@ interface Image : Media {
      * @return The green portion from the RGBA pixel color
      */
     fun green(x: Int, y: Int): Int {
-        // TODO
-        return 0
+        val pixel = get(x, y)
+        return (pixel shr 8) and 0xFF
     }
 
     /**
@@ -67,8 +67,8 @@ interface Image : Media {
      * @return The alpha portion from the RGBA pixel color
      */
     fun alpha(x: Int, y: Int): Int {
-        // TODO
-        return 0
+        val pixel = get(x, y)
+        return pixel and 0xFF
     }
 
 }

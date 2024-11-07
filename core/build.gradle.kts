@@ -63,6 +63,49 @@ kotlin {
     watchosArm32()
     watchosArm64()
     watchosDeviceArm64()
+
+    sourceSets {
+        val ktorVersion = "3.0.1"
+
+        commonMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+            implementation("io.ktor:ktor-client-core:$ktorVersion")
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+        }
+
+        nativeMain.dependencies {
+            implementation("com.soywiz:korlibs-io:6.0.1")
+        }
+
+        jvmMain.dependencies {
+            implementation("io.ktor:ktor-client-jetty:$ktorVersion")
+        }
+
+        androidMain.dependencies {
+            implementation("io.ktor:ktor-client-android:$ktorVersion")
+        }
+
+        mingwMain.dependencies {
+            implementation("io.ktor:ktor-client-winhttp:$ktorVersion")
+        }
+
+        appleMain.dependencies {
+            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+        }
+
+        linuxMain.dependencies {
+            implementation("io.ktor:ktor-client-cio:$ktorVersion")
+        }
+
+        jsMain.dependencies {
+            implementation("io.ktor:ktor-client-js:$ktorVersion")
+        }
+    }
 }
 
 android {
