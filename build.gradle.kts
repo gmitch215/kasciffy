@@ -12,7 +12,11 @@ plugins {
 
 allprojects {
     group = "xyz.gmitch215.kasciffy"
-    version = "0.1.0"
+
+    val v = "0.1.0"
+    val suffix = if (project.hasProperty("suffix")) "-${project.property("suffix")}" else ""
+    version = "${if (project.hasProperty(" snapshot ")) "$v-SNAPSHOT" else v}$suffix"
+
     description = "Asciffy images and videos"
 
     repositories {

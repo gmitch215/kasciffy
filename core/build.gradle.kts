@@ -105,7 +105,7 @@ tasks {
         delete("kotlin-js-store")
     }
 
-    create("jvmJacocoTestReport", JacocoReport::class) {
+    register("jvmJacocoTestReport", JacocoReport::class) {
         dependsOn("jvmTest")
 
         classDirectories.setFrom(layout.buildDirectory.file("classes/kotlin/jvm/"))
