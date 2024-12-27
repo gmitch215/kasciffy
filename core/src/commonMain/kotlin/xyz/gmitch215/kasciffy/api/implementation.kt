@@ -24,20 +24,22 @@ internal suspend fun asciffy(image: Image, map: String): String = coroutineScope
 
     val ascii = Array(width) { CharArray(height) }
 
-    for (x in 0 until width)
-        launch {
-            for (y in 0 until height) {
-                launch {
-                    val red = image.red(x, y)
-                    val green = image.green(x, y)
-                    val blue = image.blue(x, y)
-                    val gray = (red * RED_GRAYSCALE + green * GREEN_GRAYSCALE + blue * BLUE_GRAYSCALE).toInt()
+    coroutineScope {
+        for (x in 0 until width)
+            launch {
+                for (y in 0 until height) {
+                    launch {
+                        val red = image.red(x, y)
+                        val green = image.green(x, y)
+                        val blue = image.blue(x, y)
+                        val gray = (red * RED_GRAYSCALE + green * GREEN_GRAYSCALE + blue * BLUE_GRAYSCALE).toInt()
 
-                    val index = (gray * (map.length - 1)) / 255
-                    ascii[x][y] = map[index]
+                        val index = (gray * (map.length - 1)) / 255
+                        ascii[x][y] = map[index]
+                    }
                 }
             }
-        }
+    }
 
     return@coroutineScope ascii.joinToString("\n") {
         it.joinToString("")
