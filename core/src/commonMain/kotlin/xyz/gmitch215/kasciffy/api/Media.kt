@@ -36,10 +36,4 @@ interface Media {
     val size: Int
         get() = width * height
 
-    /**
-     * Gets this media as a byte array.
-     * @return Byte Array Representation
-     */
-    fun toByteArray(): ByteArray
-
 }
