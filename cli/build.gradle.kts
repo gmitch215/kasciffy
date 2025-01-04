@@ -19,7 +19,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":kasciffy-core"))
-                implementation("com.github.ajalt.clikt:clikt:5.0.1")
+                implementation("com.github.ajalt.clikt:clikt:5.0.2")
                 implementation("com.soywiz:korlibs-io:6.0.1")
             }
         }
