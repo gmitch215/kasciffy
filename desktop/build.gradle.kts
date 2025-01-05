@@ -27,7 +27,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.ui)
             implementation(compose.foundation)
-            implementation("org.jetbrains.jewel:jewel-int-ui-standalone-242:0.25.0")
+            implementation("org.jetbrains.jewel:jewel-int-ui-standalone-242:0.27.0")
             implementation("org.jetbrains.jewel:jewel-int-ui-decorated-window-242:0.25.0")
         }
 
