@@ -105,6 +105,10 @@ tasks {
         delete("kotlin-js-store")
     }
 
+    withType<Test> {
+        jvmArgs("-Xmx2G")
+    }
+
     register("jvmJacocoTestReport", JacocoReport::class) {
         dependsOn("jvmTest")
 
