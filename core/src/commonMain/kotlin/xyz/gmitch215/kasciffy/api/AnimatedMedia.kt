@@ -19,7 +19,7 @@ interface AnimatedMedia : Media, Iterable<Image> {
     /**
      * Gets the frame at the specified index.
      * @param index The index of the frame.
-     * @return
+     * @return The frame at the specified index.
      */
     operator fun get(index: Int): Image
 
