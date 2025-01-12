@@ -1,10 +1,14 @@
 package xyz.gmitch215.kasciffy.api
 
+import java.awt.Color
+import java.awt.Font
+import java.awt.FontMetrics
 import java.awt.image.BufferedImage
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import java.nio.file.Path
 import javax.imageio.ImageIO
 import kotlin.jvm.Throws
 
@@ -64,6 +68,20 @@ fun Image(file: File): ImageJVM {
 }
 
 /**
+ * Creates an Image from the given [Path].
+ * @param path The path to create the image from.
+ * @return The created Image.
+ */
+fun Image(path: Path): ImageJVM = Image(path.toFile())
+
+/**
+ * Creates an Image from the given path.
+ * @param path The path to create the image from.
+ * @return The created Image.
+ */
+fun Image(path: String): ImageJVM = Image(File(path))
+
+/**
  * Creates an Image from the given [BufferedImage].
  * @param name The name of the image.
  * @param bufferedImage The BufferedImage to create the image from.
@@ -99,4 +117,43 @@ private fun extension(type: Int): String = when (type) {
     BufferedImage.TYPE_INT_RGB, BufferedImage.TYPE_3BYTE_BGR -> "jpg"
     BufferedImage.TYPE_BYTE_GRAY -> "bmp"
     else -> "png"
+}
+
+internal fun toPNG(output: String, spaced: Boolean = true, fontName: String = "Monospaced", fontSize: Int = 12): BufferedImage {
+    val lines = output.split("\n")
+
+    val font = Font(fontName, Font.PLAIN, fontSize)
+    val tempImage = BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB)
+    val tempGraphics = tempImage.createGraphics()
+    tempGraphics.font = font
+    val fontMetrics: FontMetrics = tempGraphics.fontMetrics
+
+    val lineHeight = fontMetrics.height
+    val imageWidth = (lines.maxOf { fontMetrics.stringWidth(it) } * (if (spaced) 2 else 1)).coerceAtLeast(1)
+    val imageHeight = (lineHeight * lines.size).coerceAtLeast(1)
+    tempGraphics.dispose()
+    tempImage.flush()
+
+    val image = BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB)
+    val graphics = image.createGraphics()
+
+    graphics.color = Color.BLACK
+    graphics.fillRect(0, 0, imageWidth, imageHeight)
+
+    graphics.color = Color.WHITE
+    graphics.font = font
+
+    for ((index, line) in lines.withIndex()) {
+        val line0 = if (spaced) line.map { "$it " }.joinToString("") else line
+        graphics.drawString(line0, 0, (index + 1) * lineHeight - fontMetrics.descent)
+    }
+
+    graphics.dispose()
+    image.flush()
+    return image
+}
+
+internal fun toPNG(path: String, output: String, spaced: Boolean = true, fontName: String = "Monospaced", fontSize: Int = 12) {
+    val image = toPNG(output, spaced, fontName, fontSize)
+    ImageIO.write(image, "png", File(path))
 }
