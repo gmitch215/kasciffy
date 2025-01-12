@@ -54,18 +54,14 @@ kotlin {
     androidTarget {
         publishAllLibraryVariants()
     }
-    androidNativeArm32()
-    androidNativeArm64()
-    androidNativeX64()
-    androidNativeX86()
 
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    watchosX64()
     watchosArm32()
     watchosArm64()
     watchosDeviceArm64()
+    watchosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
@@ -97,6 +93,14 @@ android {
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+dokka {
+    moduleName.set("kasciffy")
+
+    pluginsConfiguration.html {
+        footerMessage.set("(c) Gregory Mitchell")
     }
 }
 
