@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 plugins {
     kotlin("multiplatform")
@@ -7,6 +8,9 @@ plugins {
 }
 
 kotlin {
+    configureSourceSets()
+    applyDefaultHierarchyTemplate()
+
     jvm()
 
     @OptIn(ExperimentalWasmDsl::class)
@@ -35,4 +39,24 @@ kotlin {
             implementation(compose.desktop.common)
         }
     }
+}
+
+fun KotlinMultiplatformExtension.configureSourceSets() {
+    sourceSets
+        .matching { it.name !in listOf("main", "test") }
+        .all {
+            val srcDir = if ("Test" in name) "test" else "main"
+            val resourcesPrefix = if (name.endsWith("Test")) "test-" else ""
+            val platform = when {
+                (name.endsWith("Main") || name.endsWith("Test")) -> name.dropLast(4)
+                else -> name.substringBefore(name.first { it.isUpperCase() })
+            }
+
+            kotlin.srcDir("src/$platform/$srcDir")
+            resources.srcDir("src/$platform/${resourcesPrefix}resources")
+
+            languageSettings.apply {
+                progressiveMode = true
+            }
+        }
 }
