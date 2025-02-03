@@ -27,6 +27,7 @@ internal suspend fun asciffy(image: Image, map: String, downScale: Int? = null):
     if (width == 0 || height == 0) return@coroutineScope ""
 
     val ascii = Array(height) { CharArray(width) }
+    val map0 = map.reversed()
 
     coroutineScope {
         for (x in 0 until width)
@@ -38,8 +39,8 @@ internal suspend fun asciffy(image: Image, map: String, downScale: Int? = null):
                         val blue = image.blue(x * downScale0, y * downScale0)
                         val gray = (red * RED_GRAYSCALE + green * GREEN_GRAYSCALE + blue * BLUE_GRAYSCALE).toInt()
 
-                        val index = (gray * (map.length - 1)) / 255
-                        ascii[y][x] = map[index]
+                        val index = (gray * (map0.length - 1)) / 255
+                        ascii[y][x] = map0[index]
                     }
                 }
             }
@@ -53,13 +54,11 @@ internal suspend fun asciffy(image: Image, map: String, downScale: Int? = null):
 internal suspend fun asciffy(animation: AnimatedMedia, map: String, downScale: Int? = null): List<String> = coroutineScope {
     val frames = animation.frames
     val asciiFrames = Array(frames.size) { "" }
-    println("Frames: ${frames.size}")
 
     coroutineScope {
         for (i in frames.indices)
             launch {
                 asciiFrames[i] = asciffy(frames[i], map, downScale)
-                println("${asciiFrames[i]}\n")
             }
     }
 
