@@ -31,12 +31,14 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.ui)
             implementation(compose.foundation)
-            implementation("org.jetbrains.jewel:jewel-int-ui-standalone-242:0.27.0")
-            implementation("org.jetbrains.jewel:jewel-int-ui-decorated-window-242:0.27.0")
         }
 
         jvmMain.dependencies {
-            implementation(compose.desktop.common)
+            implementation("org.jetbrains.jewel:jewel-int-ui-standalone-243:0.27.0")
+            implementation("org.jetbrains.jewel:jewel-int-ui-decorated-window-243:0.27.0")
+            implementation(compose.desktop.currentOs) {
+                exclude(group = "org.jetbrains.compose.material")
+            }
         }
     }
 }
