@@ -2,7 +2,7 @@ package dev.gmitch215.kasciffy.api
 
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
-import kotlin.jvm.javaClass
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 
 class TestImageJVM {
@@ -13,6 +13,7 @@ class TestImageJVM {
         assertNotNull(image.bufferedImage)
 
         val asciffy = asciffy(image, TEN_NUMERIC, 1)
+        assertFalse { asciffy.isEmpty() }
     }
 
 }
