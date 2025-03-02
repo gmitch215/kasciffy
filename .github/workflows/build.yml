@@ -32,9 +32,9 @@ jobs:
             ~/.konan/caches
             ~/.konan/dependencies
             ~/.konan/kotlin-native-prebuilt-macos-*
-          key: ${{ runner.os }}-konan-${{ hashFiles('**/Dependencies.kt') }}
+          key: ${{ runner.os }}-konan
           restore-keys: |
-            ${{ runner.os }}-konan-
+            ${{ runner.os }}-konan
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Gradle Information
@@ -68,9 +68,9 @@ jobs:
             ~/.konan/caches
             ~/.konan/dependencies
             ~/.konan/kotlin-native-prebuilt-*
-          key: ${{ runner.os }}-konan-${{ hashFiles('**/Dependencies.kt') }}
+          key: ${{ runner.os }}-konan
           restore-keys: |
-            ${{ runner.os }}-konan-
+            ${{ runner.os }}-konan
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Build with Gradle
@@ -105,9 +105,9 @@ jobs:
             ~/.konan/caches
             ~/.konan/dependencies
             ~/.konan/kotlin-native-prebuilt-macos-*
-          key: ${{ runner.os }}-konan-${{ hashFiles('**/Dependencies.kt') }}
+          key: ${{ runner.os }}-konan
           restore-keys: |
-            ${{ runner.os }}-konan-
+            ${{ runner.os }}-konan
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Gradle Test
@@ -162,6 +162,9 @@ jobs:
     if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
     timeout-minutes: 30
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -175,7 +178,7 @@ jobs:
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Build Dokka
-        run: ./gradlew clean dokkaHtml
+        run: ./gradlew clean dokkaGeneratePublicationHtml
       - name: Deploy Dokka
         run: bash dokka.sh ${GITHUB_SHA::7}
 
@@ -185,6 +188,10 @@ jobs:
     name: Publish to Repository
     if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
     timeout-minutes: 30
+
+    permissions:
+      contents: write
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -201,9 +208,9 @@ jobs:
             ~/.konan/caches
             ~/.konan/dependencies
             ~/.konan/kotlin-native-prebuilt-macos-*
-          key: ${{ runner.os }}-konan-${{ hashFiles('**/Dependencies.kt') }}
+          key: ${{ runner.os }}-konan
           restore-keys: |
-            ${{ runner.os }}-konan-
+            ${{ runner.os }}-konan
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Publish to Calculus Games
@@ -212,11 +219,11 @@ jobs:
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
-        run: ./gradlew publishAllPublicationsToCalculusGamesRepository -Psnapshot=true
+        run: ./gradlew publishAllPublicationsToCalculusGamesRepository publishJsPackageToCalculusGamesRegistry -Psnapshot=true
       - name: Publish to GitHub Packages
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
-        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository -Psuffix=${GITHUB_SHA::7}
+        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository publishJsPackageToGithubPackagesRegistry -Psuffix=${GITHUB_SHA::7}
