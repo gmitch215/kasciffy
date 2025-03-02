@@ -12,7 +12,7 @@ class TestImageJVM {
         val image = Image(javaClass.getResourceAsStream("/gmitch215.png")!!)
         assertNotNull(image.bufferedImage)
 
-        val asciffy = asciffy(image, TEN_NUMERIC, 1)
+        val asciffy = asciffy0(image, TEN_NUMERIC, 1)
         assertFalse { asciffy.isEmpty() }
     }
 

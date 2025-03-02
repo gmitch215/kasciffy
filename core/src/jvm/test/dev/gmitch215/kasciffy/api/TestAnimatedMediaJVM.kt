@@ -13,7 +13,7 @@ class TestAnimatedMediaJVM {
         assertFalse { gif.bufferedImages.isEmpty() }
         assertFalse { gif.fps == 0 }
 
-        val frames = asciffy(gif, FIFTEEN, 6)
+        val frames = asciffy0(gif, FIFTEEN, 6)
         assertFalse { frames.isEmpty() }
     }
 

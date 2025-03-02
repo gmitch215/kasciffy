@@ -1,8 +1,13 @@
 package dev.gmitch215.kasciffy.api
 
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
 /**
  * Represents a picture.
  */
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 interface Image : Media {
 
     /**
@@ -71,4 +76,5 @@ interface Image : Media {
         return pixel and 0xFF
     }
 
+    override fun asciffySync(map: String, downScale: Int?): Image
 }

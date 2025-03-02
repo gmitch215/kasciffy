@@ -1,7 +1,19 @@
+@file:OptIn(ExperimentalJsFileName::class, ExperimentalJsExport::class)
+
+@file:JvmName("Kasciffy")
+@file:JsExport
+@file:JsFileName("kasciffy")
+
 package dev.gmitch215.kasciffy.api
 
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.ExperimentalJsFileName
+import kotlin.js.JsExport
+import kotlin.js.JsFileName
+import kotlin.js.JsName
+import kotlin.jvm.JvmName
 
 /**
  * The scale value for the red channel in the RGB color space.
@@ -18,7 +30,7 @@ const val BLUE_GRAYSCALE = 0.5
  */
 const val GREEN_GRAYSCALE = 0.16
 
-internal suspend fun asciffy(image: Image, map: String, downScale: Int? = null): String = coroutineScope {
+internal suspend fun asciffy0(image: Image, map: String, downScale: Int?? = null): String = coroutineScope {
     val downScale0 = downScale ?: ((image.width * image.height) / (64 * 2))
 
     val width = image.width / downScale0
@@ -51,14 +63,15 @@ internal suspend fun asciffy(image: Image, map: String, downScale: Int? = null):
     }
 }
 
-internal suspend fun asciffy(animation: AnimatedMedia, map: String, downScale: Int? = null): List<String> = coroutineScope {
+@JsName("asciffy0_animated")
+internal suspend fun asciffy0(animation: AnimatedMedia, map: String, downScale: Int?? = null): List<String> = coroutineScope {
     val frames = animation.frames
     val asciiFrames = Array(frames.size) { "" }
 
     coroutineScope {
         for (i in frames.indices)
             launch {
-                asciiFrames[i] = asciffy(frames[i], map, downScale)
+                asciiFrames[i] = asciffy0(frames[i], map, downScale)
             }
     }
 

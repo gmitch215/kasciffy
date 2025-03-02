@@ -1,8 +1,13 @@
 package dev.gmitch215.kasciffy.api
 
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
 /**
  * Represents a piece of Media.
  */
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 interface Media {
 
     /**
@@ -36,4 +41,14 @@ interface Media {
     val size: Int
         get() = width * height
 
+    /**
+     * Synchronously Asciffies this piece of media.
+     *
+     * This is not guaranteed to be available on all platforms.
+     * @param map The ASCII map to use for asciffying.
+     * @param downScale The downscale factor to use when asciffying. This is used to reduce the size of the media, if necessary.
+     * If not specified, this is automatically calculated.
+     * @return The asciffied version of this piece of media.
+     */
+    fun asciffySync(map: String, downScale: Int? = null): Media
 }

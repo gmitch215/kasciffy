@@ -1,6 +1,17 @@
 @file:Suppress("SpellCheckingInspection")
+@file:OptIn(ExperimentalJsFileName::class, ExperimentalJsExport::class)
+
+@file:JvmName("AsciiMaps")
+@file:JsExport
+@file:JsFileName("asciiMaps.js")
 
 package dev.gmitch215.kasciffy.api
+
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.ExperimentalJsFileName
+import kotlin.js.JsExport
+import kotlin.js.JsFileName
+import kotlin.jvm.JvmName
 
 /**
  * An ASCII options map with fifty levels of detail.

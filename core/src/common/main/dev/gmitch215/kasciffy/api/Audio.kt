@@ -1,8 +1,13 @@
 package dev.gmitch215.kasciffy.api
 
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
 /**
  * Represents Audio data attached to a [Video].
  */
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 interface Audio {
 
     /**

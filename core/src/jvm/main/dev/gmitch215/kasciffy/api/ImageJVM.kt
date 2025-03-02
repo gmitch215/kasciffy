@@ -1,5 +1,6 @@
 package dev.gmitch215.kasciffy.api
 
+import kotlinx.coroutines.runBlocking
 import java.awt.Color
 import java.awt.Font
 import java.awt.FontMetrics
@@ -49,6 +50,20 @@ class ImageJVM internal constructor(
      */
     @Throws(IOException::class)
     fun write(output: OutputStream) = ImageIO.write(bufferedImage, extension, output)
+
+    /**
+     * Asynchronously Asciffies this piece of media.
+     * @param map The ASCII map to use for asciffying.
+     * @param downScale The downscale factor to use when asciffying. This is used to reduce the size of the media, if necessary.
+     * If not specified, this is automatically calculated.
+     * @return The asciffied version of this piece of media.
+     */
+    suspend fun asciffy(map: String, downScale: Int?): Image {
+        val asciffied = toPNG(asciffy0(this, map, downScale))
+        return ImageJVM(name, extension, creationDate, asciffied)
+    }
+
+    override fun asciffySync(map: String, downScale: Int?): Image = runBlocking { asciffy(map, downScale) }
 }
 
 /**

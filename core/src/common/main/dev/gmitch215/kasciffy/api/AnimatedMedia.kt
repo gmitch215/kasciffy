@@ -1,8 +1,13 @@
 package dev.gmitch215.kasciffy.api
 
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
 /**
  * Represents an Animated piece of Media.
  */
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 interface AnimatedMedia : Media, Iterable<Image> {
 
     /**
@@ -24,5 +29,5 @@ interface AnimatedMedia : Media, Iterable<Image> {
     operator fun get(index: Int): Image
 
     override fun iterator(): Iterator<Image> = frames.iterator()
-
+    override fun asciffySync(map: String, downScale: Int?): AnimatedMedia
 }
