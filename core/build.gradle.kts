@@ -11,6 +11,7 @@ plugins {
 
     `maven-publish`
     signing
+    jacoco
 }
 
 val desc = "Core API for Kasciffy"
@@ -138,22 +139,6 @@ tasks {
 
     withType<Test> {
         jvmArgs("-Xmx2G")
-    }
-
-    register("jvmJacocoTestReport", JacocoReport::class) {
-        dependsOn("jvmTest")
-
-        classDirectories.setFrom(layout.buildDirectory.file("classes/kotlin/jvm/"))
-        sourceDirectories.setFrom("src/commonMain/kotlin/", "src/jvmMain/kotlin/")
-        executionData.setFrom(layout.buildDirectory.files("jacoco/jvmTest.exec"))
-
-        reports {
-            xml.required.set(true)
-            xml.outputLocation.set(layout.buildDirectory.file("jacoco.xml"))
-
-            html.required.set(true)
-            html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
-        }
     }
 }
 

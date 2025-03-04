@@ -14,24 +14,19 @@ import kotlin.js.JsFileName
 import kotlin.jvm.JvmName
 
 /**
- * An ASCII options map with fifty levels of detail.
- */
-const val FIFTY = "@\$B%8&MW#*oakbdpqwmQ0CLJnurxyvzc[]{}()|\\/?!Iil+<>_:;~-^,`'. "
-
-/**
  * An ASCII options map with thirty levels of detail.
  */
-const val THIRTY = "@$#%&*o+=x^~;:-,.`\"|\\/[]{}()<>?_ "
+const val THIRTY = "@$#%[]{}()&?/\\|<>o+=x~;:-,`._ "
 
 /**
  * An ASCII options map with twenty levels of detail.
  */
-const val TWENTY = "@&$%#*o+=x^~;:-,.` "
+const val TWENTY = "@&$%#?!o+=x^~;:-,.` "
 
 /**
  * An ASCII options map with fifteen levels of detail.
  */
-const val FIFTEEN = "@&$%#0ol+=-:. "
+const val FIFTEEN = "@&$%#0?ol+=-:. "
 
 /**
  * An ASCII options map with twelve levels of detail.

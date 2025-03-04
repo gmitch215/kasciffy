@@ -2,12 +2,15 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 plugins {
     kotlin("multiplatform")
+
+    jacoco
 }
 
 kotlin {
     configureSourceSets()
     applyDefaultHierarchyTemplate()
 
+    jvm()
     js {
         nodejs {
             binaries.executable()
@@ -21,12 +24,15 @@ kotlin {
     macosX64()
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(project(":kasciffy-core"))
-                implementation("com.github.ajalt.clikt:clikt:5.0.3")
-                implementation("com.soywiz:korlibs-io:6.0.1")
-            }
+        commonMain.dependencies {
+            implementation(project(":kasciffy-core"))
+            implementation("com.github.ajalt.clikt:clikt:5.0.3")
+            implementation("com.soywiz:korlibs-io:6.0.1")
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
         }
     }
 }
