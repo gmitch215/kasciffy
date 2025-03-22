@@ -1,6 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
@@ -82,8 +83,28 @@ kotlin {
             implementation(npm("canvas", "3.1.0"))
         }
 
-        nativeMain.dependencies {
-            implementation("com.soywiz:korlibs-io:6.0.1")
+        // Custom SourceSets
+
+        val desktopMain by creating {
+            dependsOn(commonMain.get())
+            dependsOn(nativeMain.get())
+        }
+
+        macosMain.get().dependsOn(desktopMain)
+        mingwMain.get().dependsOn(desktopMain)
+        linuxMain.get().dependsOn(desktopMain)
+    }
+
+    // CInterop
+    targets.filterIsInstance<KotlinNativeTarget>().forEach {
+        it.compilations.getByName("main") {
+            cinterops {
+                val spng by creating {
+                    packageName("spng")
+                    includeDirs.allHeaders(rootProject.file("lib/spng/spng"))
+                    headers = rootProject.files("lib/spng/spng/spng.h", "lib/spng/spng/spng.c")
+                }
+            }
         }
     }
 }
