@@ -5,6 +5,9 @@
     "group:allNonMajor"
   ],
   "dependencyDashboard": false,
+  "git-submodules": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchUpdateTypes": [
