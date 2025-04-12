@@ -41,7 +41,7 @@ kotlin {
         }
 
         generateTypeScriptDefinitions()
-        useEsModules()
+        useCommonJs()
     }
 
     mingwX64()

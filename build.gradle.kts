@@ -1,11 +1,9 @@
-import groovy.xml.XmlParser
-
 plugins {
     kotlin("multiplatform") version "2.1.20" apply false
     kotlin("plugin.compose") version "2.1.20" apply false
-    id("com.android.library") version "8.9.1" apply false
+    id("com.android.library") version "8.7.3" apply false
     id("org.jetbrains.dokka") version "2.0.0" apply false
-    id("org.jetbrains.compose") version "1.8.0+check" apply false
+    id("org.jetbrains.compose") version "1.7.3" apply false
     id("com.vanniktech.maven.publish") version "0.31.0" apply false
     id("dev.petuska.npm.publish") version "3.5.3" apply false
 
