@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalForeignApi::class)
-
 package dev.gmitch215.kasciffy.api
 
 import kotlinx.cinterop.*
@@ -8,7 +6,7 @@ import spng.*
 import kotlin.time.DurationUnit
 import kotlin.time.TimeSource
 
-@OptIn(UnsafeNumber::class)
+@OptIn(UnsafeNumber::class, ExperimentalForeignApi::class)
 actual fun Image(file: String): ImageNative = memScoped {
     val name = file.substringAfterLast('/').substringBeforeLast('.')
     val extension = file.substringAfterLast('.')
@@ -25,7 +23,7 @@ actual fun Image(file: String): ImageNative = memScoped {
     return Image(name, extension, currentTimeMillis, ctx) ?: throw IllegalStateException("Failed to create Image.")
 }
 
-@OptIn(UnsafeNumber::class)
+@OptIn(UnsafeNumber::class, ExperimentalForeignApi::class)
 internal fun MemScope.Image(name: String, extension: String, creationDate: Long, ctx: CPointer<spng_ctx>): ImageNative? {
     val ihdr = nativeHeap.alloc<spng_ihdr>()
     if (spng_get_ihdr(ctx, ihdr.ptr) != 0) return null

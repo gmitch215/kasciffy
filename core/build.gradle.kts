@@ -57,10 +57,6 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    watchosArm32()
-    watchosArm64()
-    watchosDeviceArm64()
-    watchosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
@@ -130,7 +126,7 @@ fun KotlinMultiplatformExtension.configureSourceSets() {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 35
     namespace = "dev.gmitch215.kasciffy"
 
     compileOptions {

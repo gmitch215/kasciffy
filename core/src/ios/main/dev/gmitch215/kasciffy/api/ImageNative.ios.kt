@@ -8,7 +8,7 @@ import spng.*
 import kotlin.time.DurationUnit
 import kotlin.time.TimeSource
 
-@OptIn(UnsafeNumber::class)
+@OptIn(UnsafeNumber::class, ExperimentalForeignApi::class)
 actual fun Image(file: String): ImageNative = memScoped {
     val name = file.substringAfterLast('/').substringBeforeLast('.')
     val extension = file.substringAfterLast('.')
@@ -38,7 +38,7 @@ internal fun MemScope.Image(name: String, extension: String, creationDate: Long,
         if (spng_decode_image(ctx, pinned.addressOf(0), size.value, SPNG_FMT_RGBA8.toInt(), 0) != 0) return null
     }
 
-    val rgbValues = Array<IntArray>(ihdr.height.toInt()) { IntArray(ihdr.width.toInt()) }
+    val rgbValues = Array(ihdr.height.toInt()) { IntArray(ihdr.width.toInt()) }
     for (y in 0 until ihdr.height.toInt())
         for (x in 0 until ihdr.width.toInt()) {
             val index = (y * ihdr.width.toInt() + x) * 4
@@ -47,7 +47,6 @@ internal fun MemScope.Image(name: String, extension: String, creationDate: Long,
             val b = data[index + 2].toInt()
             rgbValues[y][x] = (r shl 16) or (g shl 8) or b
         }
-
 
     return ImageNative(name, extension, creationDate, ctx, ihdr, rgbValues)
 }
