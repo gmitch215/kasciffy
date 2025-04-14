@@ -40,11 +40,10 @@ kotlin {
             testTask {
                 enabled = false
             }
-
-            binaries.executable()
-            binaries.library()
         }
 
+        binaries.library()
+        binaries.executable()
         generateTypeScriptDefinitions()
     }
 
