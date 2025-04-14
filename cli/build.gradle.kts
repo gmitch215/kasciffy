@@ -11,12 +11,6 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     jvm()
-    js {
-        nodejs {
-            binaries.executable()
-        }
-    }
-
     mingwX64()
     linuxX64()
     linuxArm64()
