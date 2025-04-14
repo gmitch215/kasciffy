@@ -253,19 +253,8 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
           cache: 'gradle'
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install UglifyJS
-        run: npm install -g uglify-js
-      - name: Extract Gradle version
-        run: echo "VERSION=$(./gradlew properties -Psnapshot=true | grep '^version:' | awk '{print $2}')" >> $GITHUB_ENV
-      - name: Build JS Library
-        run: ./gradlew clean jsBrowserProductionLibraryDistribution
-      - name: Compress JS Library
-        run: |
-          mkdir core/build/upload
-          uglifyjs core/build/dist/js/productionLibrary/*.js -o core/build/upload/kasciffy-${{ env.VERSION }}.min.js --source-map -c
+      - name: Build JS Distribution
+        run: ./gradlew clean jsBrowserDistribution
       - name: Upload to R2 Bucket
         uses: ryand56/r2-upload-action@latest
         with:
@@ -273,5 +262,5 @@ jobs:
           r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
           r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           r2-bucket: ${{ secrets.R2_BUCKET }}
-          source-dir: core/build/upload/
+          source-dir: core/build/dist/js/productionExecutable
           destination-dir: lib/kasciffy

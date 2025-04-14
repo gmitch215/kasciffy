@@ -1,5 +1,4 @@
 import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -33,15 +32,20 @@ kotlin {
     }
     js {
         browser {
+            webpackTask {
+                mainOutputFileName = "${project.name}-${project.version}.js"
+                output.library = "kasciffy"
+            }
+
             testTask {
                 enabled = false
             }
 
+            binaries.executable()
             binaries.library()
         }
 
         generateTypeScriptDefinitions()
-        useCommonJs()
     }
 
     mingwX64()
@@ -126,7 +130,7 @@ fun KotlinMultiplatformExtension.configureSourceSets() {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 34
     namespace = "dev.gmitch215.kasciffy"
 
     compileOptions {
@@ -154,19 +158,33 @@ tasks {
         delete("kotlin-js-store")
     }
 
+    named("jsBrowserProductionLibraryDistribution") {
+        dependsOn("jsProductionExecutableCompileSync")
+    }
+
+    named("jsBrowserProductionWebpack") {
+        dependsOn("jsProductionLibraryCompileSync")
+    }
+
     withType<Test> {
         jvmArgs("-Xmx2G")
     }
-}
 
-signing {
-    val signingKey: String? by project
-    val signingPassword: String? by project
+    register("jvmJacocoTestReport", JacocoReport::class) {
+        dependsOn("jvmTest")
 
-    if (signingKey != null && signingPassword != null)
-        useInMemoryPgpKeys(signingKey, signingPassword)
+        classDirectories.setFrom(layout.buildDirectory.file("classes/kotlin/jvm/"))
+        sourceDirectories.setFrom("src/common/main/", "src/jvm/main/")
+        executionData.setFrom(layout.buildDirectory.files("jacoco/jvmTest.exec"))
 
-    sign(publishing.publications)
+        reports {
+            xml.required.set(true)
+            xml.outputLocation.set(layout.buildDirectory.file("jacoco.xml"))
+
+            html.required.set(true)
+            html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+        }
+    }
 }
 
 publishing {
