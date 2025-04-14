@@ -254,7 +254,7 @@ jobs:
           java-version: '17'
           cache: 'gradle'
       - name: Build JS Distribution
-        run: ./gradlew clean jsBrowserDistribution
+        run: ./gradlew clean jsBrowserDistribution -Psnapshot=true
       - name: Upload to R2 Bucket
         uses: ryand56/r2-upload-action@latest
         with:
