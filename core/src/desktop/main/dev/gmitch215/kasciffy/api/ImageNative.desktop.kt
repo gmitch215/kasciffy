@@ -23,6 +23,7 @@ actual fun Image(file: String): ImageNative = memScoped {
     return Image(name, extension, currentTimeMillis, ctx) ?: throw IllegalStateException("Failed to create Image.")
 }
 
+@Suppress("UnusedReceiverParameter")
 @OptIn(UnsafeNumber::class, ExperimentalForeignApi::class)
 internal fun MemScope.Image(name: String, extension: String, creationDate: Long, ctx: CPointer<spng_ctx>): ImageNative? {
     val ihdr = nativeHeap.alloc<spng_ihdr>()
@@ -36,7 +37,7 @@ internal fun MemScope.Image(name: String, extension: String, creationDate: Long,
         if (spng_decode_image(ctx, pinned.addressOf(0), size.value, SPNG_FMT_RGBA8.toInt(), 0) != 0) return null
     }
 
-    val rgbValues = Array<IntArray>(ihdr.height.toInt()) { IntArray(ihdr.width.toInt()) }
+    val rgbValues = Array(ihdr.height.toInt()) { IntArray(ihdr.width.toInt()) }
     for (y in 0 until ihdr.height.toInt())
         for (x in 0 until ihdr.width.toInt()) {
             val index = (y * ihdr.width.toInt() + x) * 4

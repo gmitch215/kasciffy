@@ -38,6 +38,7 @@ class ImageNative internal constructor(
     /**
      * Frees the [spng_ctx] pointer.
      */
+    @OptIn(ExperimentalForeignApi::class)
     fun free() = spng_ctx_free(ctxPointer)
 
     override fun get(x: Int, y: Int): Int = rgbValues[y][x]
