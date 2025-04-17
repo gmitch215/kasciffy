@@ -6,18 +6,18 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.minutes
 
 class TestImageJs {
 
-    @Suppress("HttpUrlsUsage")
     @Test
-    fun testFile() = runTest {
-        // FIXME: can't find resources
-        val image = Image("http://${window.location.host}/src/common/test-resources/gmitch215.png").await()
+    fun testFile() = runTest(timeout = 10.minutes) {
+        val image = Image("${window.location.origin}/base/kotlin/gmitch215.png").await()
         assertTrue { image.toDataURL().isNotEmpty() }
 
         val asciffy = asciffy0(image, TEN_NUMERIC, 1)
         assertFalse { asciffy.isEmpty() }
+        println(asciffy)
     }
 
 }

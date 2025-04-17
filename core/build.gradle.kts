@@ -2,6 +2,8 @@ import com.goncalossilva.useanybrowser.useAnyBrowser
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import java.time.Duration
+import java.time.temporal.ChronoUnit
 
 plugins {
     kotlin("multiplatform")
@@ -40,6 +42,7 @@ kotlin {
 
             testTask {
                 useKarma {
+                    timeout.set(Duration.of(10, ChronoUnit.MINUTES))
                     useAnyBrowser()
                 }
             }
@@ -128,7 +131,7 @@ fun KotlinMultiplatformExtension.configureSourceSets() {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 35
     namespace = "dev.gmitch215.kasciffy"
 
     compileOptions {
