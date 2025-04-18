@@ -49,11 +49,11 @@ subprojects {
 
         if (findByName("compileKotlinJs") != null) {
             named("jsBrowserProductionLibraryDistribution") {
-                dependsOn("jsProductionExecutableCompileSync")
+                mustRunAfter("jsProductionExecutableCompileSync")
             }
 
             named("jsBrowserProductionWebpack") {
-                dependsOn("jsProductionLibraryCompileSync")
+                mustRunAfter("jsProductionLibraryCompileSync")
             }
         }
     }

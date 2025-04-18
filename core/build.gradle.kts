@@ -1,8 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import java.time.Duration
-import java.time.temporal.ChronoUnit
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig.Mode
 
 plugins {
     kotlin("multiplatform")
@@ -33,15 +32,20 @@ kotlin {
     }
     js {
         browser {
+            commonWebpackConfig {
+                outputFileName = "${project.name}-${project.version}.js"
+            }
+
             webpackTask {
-                mainOutputFileName = "${project.name}-${project.version}.js"
+                if (!project.hasProperty("snapshot"))
+                    mode = Mode.PRODUCTION
+
                 output.library = "kasciffy"
             }
 
             testTask {
                 useKarma {
                     useSourceMapSupport()
-                    timeout.set(Duration.of(10, ChronoUnit.MINUTES))
 
                     compilation.dependencies {
                         implementation(npm("karma-detect-browsers", "^2.3"))
@@ -75,13 +79,13 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
         }
 
         commonTest.dependencies {
             implementation(kotlin("test"))
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
         }
 
         jvmMain.dependencies {
@@ -163,6 +167,14 @@ dokka {
 tasks {
     clean {
         delete("kotlin-js-store")
+    }
+
+    named("jsBrowserProductionLibraryDistribution") {
+        mustRunAfter("jsProductionExecutableCompileSync")
+    }
+
+    named("jsBrowserProductionWebpack") {
+        mustRunAfter("jsProductionLibraryCompileSync")
     }
 
     withType<Test> {
