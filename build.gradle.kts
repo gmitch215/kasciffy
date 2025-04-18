@@ -46,6 +46,16 @@ subprojects {
                 html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
             }
         }
+
+        if (findByName("jsBrowserDistribution") != null) {
+            named("jsBrowserProductionLibraryDistribution") {
+                dependsOn("jsProductionExecutableCompileSync")
+            }
+
+            named("jsBrowserProductionWebpack") {
+                dependsOn("jsProductionLibraryCompileSync")
+            }
+        }
     }
 }
 

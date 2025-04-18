@@ -165,14 +165,6 @@ tasks {
         delete("kotlin-js-store")
     }
 
-    named("jsBrowserProductionLibraryDistribution") {
-        dependsOn("jsProductionExecutableCompileSync")
-    }
-
-    named("jsBrowserProductionWebpack") {
-        dependsOn("jsProductionLibraryCompileSync")
-    }
-
     withType<Test> {
         jvmArgs("-Xmx2G")
     }
