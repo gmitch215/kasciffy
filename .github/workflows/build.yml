@@ -133,7 +133,7 @@ jobs:
         id: jacoco_reporter
         uses: PavanMudigonda/jacoco-reporter@v5.1
         with:
-          coverage_results_path: core/build/jacoco.xml
+          coverage_results_path: build/jacoco.xml
           coverage_report_name: Code Coverage
           github_token: ${{ secrets.GITHUB_TOKEN }}
           skip_check_run: false
