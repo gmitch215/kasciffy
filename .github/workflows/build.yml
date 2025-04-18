@@ -115,9 +115,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-konan
       - name: Install Chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@v1
+      - name: Set Chrome Path
+        run: |
+          echo "CHROME_BIN=${{ steps.setup-chrome.outputs.chrome_path }}" >> $GITHUB_ENV
+          echo "CHROMIUM_BIN=${{ steps.setup-chrome.outputs.chrome_path }}" >> $GITHUB_ENV
       - name: Install Firefox
+        id: setup-firefox
         uses: browser-actions/setup-firefox@v1
+      - name: Set Firefox Path
+        run: |
+          echo "FIREFOX_BIN=${{ steps.setup-firefox.outputs.firefox_path }}" >> $GITHUB_ENV
+          echo "MOZ_HEADLESS=1" >> $GITHUB_ENV
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Gradle Test
