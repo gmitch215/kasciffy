@@ -47,7 +47,7 @@ subprojects {
             }
         }
 
-        if (findByName("jsBrowserDistribution") != null) {
+        if (findByName("compileKotlinJs") != null) {
             named("jsBrowserProductionLibraryDistribution") {
                 dependsOn("jsProductionExecutableCompileSync")
             }
