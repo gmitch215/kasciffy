@@ -17,7 +17,6 @@ class TestImageJs {
 
         val asciffy = asciffy0(image, TEN_NUMERIC, 1)
         assertFalse { asciffy.isEmpty() }
-        println(asciffy)
     }
 
 }

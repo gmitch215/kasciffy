@@ -13,6 +13,7 @@ import org.w3c.dom.HTMLImageElement
 import org.w3c.files.Blob
 import org.w3c.files.BlobPropertyBag
 import org.w3c.files.FileReader
+import kotlin.js.Date
 import kotlin.js.Promise
 
 /**
@@ -22,7 +23,9 @@ import kotlin.js.Promise
 class ImageJS internal constructor(
     override val name: String,
     override val extension: String,
-    override val creationDate: Long,
+    @Deprecated(message = "JS does not support 64-bit creation dates as an integer", replaceWith = ReplaceWith("creationDateDouble"))
+    override val creationDate: Long = -1,
+    val creationDateDouble: Double,
     private val canvas: HTMLCanvasElement
 ) : Image {
     override val width: Int
@@ -53,7 +56,7 @@ class ImageJS internal constructor(
     fun asciffy(map: String, downScale: Int? = null): Promise<ImageJS> = GlobalScope.promise {
         val asciffied = asciffy0(this@ImageJS, map, downScale)
         val canvas = toCanvas(asciffied, spaced = true, fontName = "Monospace", fontSize = 12)
-        return@promise ImageJS(name, extension, creationDate, canvas)
+        return@promise ImageJS(name, extension, creationDateDouble = creationDateDouble, canvas = canvas)
     }
 
     @Deprecated("Use asciffy instead.", replaceWith = ReplaceWith("asciffy(map, downScale)"))
@@ -61,14 +64,35 @@ class ImageJS internal constructor(
         = throw UnsupportedOperationException("asciffySync is not supported on JS. Use asciffy instead.")
 }
 
+val SUPPORTED_TYPES = listOf(
+    "png"
+)
+
 /**
  * Creates an Image from the given URL.
  * @param url The URL to create the image from.
  * @return The created Image as a JavaScript promise.
  */
 @JsExport
-@JsName("ImageFromUrl")
+@JsName("TryImageFromUrl")
 fun Image(url: String): Promise<ImageJS> {
+    val extension = url.substringAfterLast(".")
+    if (extension !in SUPPORTED_TYPES) {
+        throw IllegalArgumentException("Unsupported image type: $extension")
+    }
+
+    return Image(url, extension)
+}
+
+/**
+ * Creates an Image from the given URL.
+ * @param url The URL to create the image from.
+ * @param extension The extension of the image (e.g. "png").
+ * @return The created Image as a JavaScript promise.
+ */
+@JsExport
+@JsName("ImageFromUrl")
+fun Image(url: String, extension: String): Promise<ImageJS> {
     return Promise { resolve, reject ->
         val img = document.createElement("img") as HTMLImageElement
         img.src = url
@@ -78,7 +102,7 @@ fun Image(url: String): Promise<ImageJS> {
             canvas.width = img.width
             canvas.height = img.height
             ctx.drawImage(img, 0.0, 0.0)
-            resolve(ImageJS("Unknown", "png", js("Date.now()") as Long, canvas))
+            resolve(ImageJS("Unknown", extension, creationDateDouble = Date.now(), canvas = canvas))
         }
         img.onerror = { _, _, _, _, _ -> reject(Error("Failed to load image: $url")) }
     }
@@ -87,11 +111,12 @@ fun Image(url: String): Promise<ImageJS> {
 /**
  * Creates an Image from the given [Blob].
  * @param blob The blob to create the image from.
+ * @param extension The extension of the image (e.g. "png").
  * @return The created Image as a JavaScript promise.
  */
 @JsExport
 @JsName("ImageFromBlob")
-fun Image(blob: Blob): Promise<ImageJS> {
+fun Image(blob: Blob, extension: String): Promise<ImageJS> {
     val reader = FileReader()
     val promise = Promise { resolve, _ ->
         reader.onload = { resolve(reader.result as String) }
@@ -99,21 +124,21 @@ fun Image(blob: Blob): Promise<ImageJS> {
     reader.readAsDataURL(blob)
 
     return Promise { resolve, _ ->
-        promise.then { url -> Image(url).then { resolve(it) } }
+        promise.then { url -> Image(url, extension).then { resolve(it) } }
     }
 }
 
 /**
  * Creates an Image from the given binary data.
  * @param binary The binary data to create the image from.
- * @param type The type of the image (e.g. "image/png").
+ * @param type The MIME type of the image (e.g. "image/png").
  * @return The created Image as a JavaScript promise.
  */
 @JsExport
 @JsName("ImageFromBinary")
 fun Image(binary: ByteArray, type: String): Promise<ImageJS> {
     val blob = Blob(arrayOf(binary.asDynamic()), BlobPropertyBag(type))
-    return Image(blob)
+    return Image(blob, type.substringAfter("/"))
 }
 
 internal fun toCanvas(output: String, spaced: Boolean = true, fontName: String = "Monospace", fontSize: Int = 12): HTMLCanvasElement {

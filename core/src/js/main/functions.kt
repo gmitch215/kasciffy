@@ -27,8 +27,8 @@ private fun resolveImage(image: ImageJS, map: String, downScale: Int?, resolve: 
  */
 @JsExport
 @JsName("asciffyUrl")
-fun asciffy(url: String, map: String, downScale: Int? = null): Promise<String> = Promise { resolve, reject ->
-    Image(url).then { resolveImage(it, map, downScale, resolve, reject) }
+fun asciffy(url: String, extension: String, map: String, downScale: Int? = null): Promise<String> = Promise { resolve, reject ->
+    Image(url, extension).then { resolveImage(it, map, downScale, resolve, reject) }
 }
 
 /**
@@ -43,6 +43,22 @@ fun asciffy(url: String, map: String, downScale: Int? = null): Promise<String> =
  */
 @JsExport
 @JsName("asciffyBlob")
-fun asciffy(blob: Blob, map: String, downScale: Int? = null): Promise<String> = Promise { resolve, reject ->
-    Image(blob).then { resolveImage(it, map, downScale, resolve, reject) }
+fun asciffy(blob: Blob, extension: String, map: String, downScale: Int? = null): Promise<String> = Promise { resolve, reject ->
+    Image(blob, extension).then { resolveImage(it, map, downScale, resolve, reject) }
+}
+
+/**
+ * Asciffies the given ByteArray using the specified ASCII map.
+ * This function is asynchronous and returns a Promise that resolves to the data URL of the asciffied image.
+ *
+ * @param binary The ByteArray to be asciffied.
+ * @param map The ASCII map to use for asciffying.
+ * @param downScale The downscale factor to use when asciffying. This is used to reduce the size of the media, if necessary.
+ * If not specified, this is automatically calculated.
+ * @return A Promise that resolves to the data URL of the asciffied image.
+ */
+@JsExport
+@JsName("asciffyBinary")
+fun asciffy(binary: ByteArray, extension: String, map: String, downScale: Int? = null): Promise<String> = Promise { resolve, reject ->
+    Image(binary, extension).then { resolveImage(it, map, downScale, resolve, reject) }
 }
