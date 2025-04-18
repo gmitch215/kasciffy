@@ -114,6 +114,10 @@ jobs:
           key: ${{ runner.os }}-konan
           restore-keys: |
             ${{ runner.os }}-konan
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@v1
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Gradle Test

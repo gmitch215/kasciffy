@@ -1,4 +1,3 @@
-import com.goncalossilva.useanybrowser.useAnyBrowser
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
@@ -10,7 +9,6 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.dokka")
     id("com.vanniktech.maven.publish")
-    id("com.goncalossilva.useanybrowser")
 
     `maven-publish`
     signing
@@ -42,8 +40,16 @@ kotlin {
 
             testTask {
                 useKarma {
+                    useSourceMapSupport()
                     timeout.set(Duration.of(10, ChronoUnit.MINUTES))
-                    useAnyBrowser()
+
+                    compilation.dependencies {
+                        implementation(npm("karma-detect-browsers", "^2.3"))
+                    }
+
+                    useChromeHeadless()
+                    useChromiumHeadless()
+                    useFirefoxHeadless()
                 }
             }
         }
