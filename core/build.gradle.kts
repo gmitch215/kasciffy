@@ -1,6 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig.Mode
 
 plugins {
@@ -106,16 +107,47 @@ kotlin {
         linuxMain.get().dependsOn(desktopMain)
     }
 
-    // CInterop
-    targets.filterIsInstance<KotlinNativeTarget>().forEach {
-        it.compilations.getByName("main") {
+    targets.filterIsInstance<KotlinNativeTarget>().forEach { target ->
+        // CInterop
+        target.compilations.getByName("main") {
             cinterops {
                 val spng by creating {
                     packageName("spng")
                     includeDirs.allHeaders(rootProject.file("lib/spng/spng"))
                     headers = rootProject.files("lib/spng/spng/spng.h", "lib/spng/spng/spng.c")
                 }
+
+                val olivec by creating {
+                    definitionFile.set(rootProject.file("lib/olivec.def"))
+
+                    packageName("olivec")
+                    includeDirs.allHeaders(rootProject.files("lib/olive", "lib/olive/dev-deps"))
+                    headers = rootProject.files(
+                        "lib/olive/olive.c",
+                        "lib/olive/dev-deps/stb_image.h",
+                        "lib/olive/dev-deps/stb_image_write.h"
+                    )
+                }
             }
+        }
+
+        target.binaries {
+//
+//            val isDebug = version.toString().contains("SNAPSHOT")
+//
+//            sharedLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
+//                baseName = rootProject.name
+//            }
+//
+//            staticLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
+//                baseName = rootProject.name
+//            }
+//
+//            if (target.name.contains("macos") || target.name.contains("ios")) {
+//                framework(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
+//                    baseName = rootProject.name
+//                }
+//            }
         }
     }
 }
