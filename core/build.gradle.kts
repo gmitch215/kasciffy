@@ -132,7 +132,7 @@ kotlin {
         }
 
         target.binaries {
-//
+//            https://youtrack.jetbrains.com/issue/KT-76881/Cant-Create-Native-Binaries-with-CInterop-Libraries
 //            val isDebug = version.toString().contains("SNAPSHOT")
 //
 //            sharedLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
