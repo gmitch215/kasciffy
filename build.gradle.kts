@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.compose") version "1.7.3" apply false
     id("com.vanniktech.maven.publish") version "0.31.0" apply false
     id("com.goncalossilva.useanybrowser") version "0.3.0" apply false
+    id("com.goncalossilva.resources") version "0.10.0" apply false
 
     `maven-publish`
     jacoco
@@ -26,6 +27,7 @@ allprojects {
         google()
         gradlePluginPortal()
         maven("https://packages.jetbrains.team/maven/p/kpm/public/")
+        maven("https://repo.calcugames.xyz/repository/kncr/")
     }
 }
 

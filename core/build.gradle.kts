@@ -66,17 +66,12 @@ kotlin {
 
     mingwX64()
     linuxX64()
-    linuxArm64()
     macosX64()
     macosArm64()
 
     androidTarget {
         publishAllLibraryVariants()
     }
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
@@ -95,59 +90,36 @@ kotlin {
             implementation("ws.schild:jave-all-deps:3.5.0")
         }
 
-        // Custom SourceSets
-
-        val desktopMain by creating {
-            dependsOn(commonMain.get())
-            dependsOn(nativeMain.get())
+        // Native Libraries
+        mapOf(
+            mingwX64Main to "mingwx64",
+            macosX64Main to "macosx64",
+            macosArm64Main to "macosarm64",
+            linuxX64Main to "linuxx64"
+        ).forEach { sourceSet, platform ->
+            sourceSet.dependencies {
+                api("com.github.madler:zlib-$platform:1.3.1@klib")
+                api("com.github.randy408:libspng-$platform:0.7.4@klib")
+                api("com.github.tsoding:olive_c-$platform:d770d9c9@klib")
+            }
         }
-
-        macosMain.get().dependsOn(desktopMain)
-        mingwMain.get().dependsOn(desktopMain)
-        linuxMain.get().dependsOn(desktopMain)
     }
 
     targets.filterIsInstance<KotlinNativeTarget>().forEach { target ->
-        // CInterop
-        target.compilations.getByName("main") {
-            cinterops {
-                val spng by creating {
-                    packageName("spng")
-                    includeDirs.allHeaders(rootProject.file("lib/spng/spng"))
-                    headers = rootProject.files("lib/spng/spng/spng.h", "lib/spng/spng/spng.c")
-                }
-
-                val olivec by creating {
-                    definitionFile.set(rootProject.file("lib/olivec.def"))
-
-                    packageName("olivec")
-                    includeDirs.allHeaders(rootProject.files("lib/olive", "lib/olive/dev-deps"))
-                    headers = rootProject.files(
-                        "lib/olive/olive.c",
-                        "lib/olive/dev-deps/stb_image.h",
-                        "lib/olive/dev-deps/stb_image_write.h"
-                    )
-                }
-            }
-        }
 
         target.binaries {
 //            https://youtrack.jetbrains.com/issue/KT-76881/Cant-Create-Native-Binaries-with-CInterop-Libraries
-//            val isDebug = version.toString().contains("SNAPSHOT")
-//
-//            sharedLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
-//                baseName = rootProject.name
-//            }
-//
-//            staticLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
-//                baseName = rootProject.name
-//            }
-//
-//            if (target.name.contains("macos") || target.name.contains("ios")) {
-//                framework(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
-//                    baseName = rootProject.name
-//                }
-//            }
+            val isDebug = version.toString().contains("SNAPSHOT")
+
+            staticLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
+                baseName = rootProject.name
+            }
+
+            if (target.name.contains("macos")) {
+                framework(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
+                    baseName = rootProject.name
+                }
+            }
         }
     }
 }
