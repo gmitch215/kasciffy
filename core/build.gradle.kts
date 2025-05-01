@@ -98,7 +98,7 @@ kotlin {
             linuxX64Main to "linuxx64"
         ).forEach { sourceSet, platform ->
             sourceSet.dependencies {
-                api("com.github.madler:zlib-$platform:1.3.1@klib")
+                api("com.github.richgel999:miniz-$platform:3.0.2@klib")
                 api("com.github.randy408:libspng-$platform:0.7.4@klib")
                 api("com.github.tsoding:olive_c-$platform:d770d9c9@klib")
             }
@@ -106,18 +106,43 @@ kotlin {
     }
 
     targets.filterIsInstance<KotlinNativeTarget>().forEach { target ->
-
         target.binaries {
 //            https://youtrack.jetbrains.com/issue/KT-76881/Cant-Create-Native-Binaries-with-CInterop-Libraries
             val isDebug = version.toString().contains("SNAPSHOT")
 
+            getByName("debugTest").apply {
+                linkerOpts("-lz")
+            }
+
             staticLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
                 baseName = rootProject.name
+
+                export("com.github.richgel999:miniz-${target.name}:3.0.2@klib")
+                export("com.github.randy408:libspng-${target.name}:0.7.4@klib")
+                export("com.github.tsoding:olive_c-${target.name}:d770d9c9@klib")
+
+                linkerOpts("-lz", "-lm", "-v")
+            }
+
+            sharedLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
+                baseName = rootProject.name
+
+                export("com.github.richgel999:miniz-${target.name}:3.0.2@klib")
+                export("com.github.randy408:libspng-${target.name}:0.7.4@klib")
+                export("com.github.tsoding:olive_c-${target.name}:d770d9c9@klib")
+
+                linkerOpts("-lz", "-lm", "-v")
             }
 
             if (target.name.contains("macos")) {
                 framework(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
                     baseName = rootProject.name
+
+                    export("com.github.richgel999:miniz-${target.name}:3.0.2@klib")
+                    export("com.github.randy408:libspng-${target.name}:0.7.4@klib")
+                    export("com.github.tsoding:olive_c-${target.name}:d770d9c9@klib")
+
+                    linkerOpts("-lz")
                 }
             }
         }
