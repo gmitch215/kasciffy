@@ -22,7 +22,7 @@ actual fun Image(file: String): ImageNative = memScoped {
     val extension = file.substringAfterLast('.')
     if (extension != "png") throw IllegalArgumentException("Only PNG files are supported.")
 
-    val path = NSBundle.mainBundle.pathForResource(file.substringBeforeLast('.'), file.substringAfterLast('.'))
+    val path = NSBundle.mainBundle.pathForResource(file.substringBeforeLast('.'), file.substringAfterLast('.')) ?: error("File not found: $file")
     val data = NSData.dataWithContentsOfFile(path, NSDataReadingUncached, null)
     val png = data?.bytes
 
