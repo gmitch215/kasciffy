@@ -1,8 +1,10 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
 
+    application
     jacoco
 }
 
@@ -26,6 +28,15 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
+        }
+    }
+
+    targets.filterIsInstance<KotlinNativeTarget>().forEach { target ->
+        target.binaries {
+            executable {
+                baseName = "kasciffy"
+                entryPoint = "dev.gmitch215.kasciffy.cli.main"
+            }
         }
     }
 }
