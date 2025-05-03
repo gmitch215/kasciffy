@@ -57,8 +57,8 @@ jobs:
             os: macos-15
           - name: windows-x64
             os: windows-2025
-          - nane: linux-x64
-            os: ubuntu-24.04
+          - name: linux-x64
+            os: ubuntu-22.04
 
     name: Build Project / ${{ matrix.name }}
     steps:
@@ -150,14 +150,14 @@ jobs:
         uses: browser-actions/setup-chrome@v1
       - name: Set Chrome Path
         run: |
-          echo "CHROME_BIN=${{ steps.setup-chrome.outputs.chrome_path }}" >> $GITHUB_ENV
-          echo "CHROMIUM_BIN=${{ steps.setup-chrome.outputs.chrome_path }}" >> $GITHUB_ENV
+          echo "CHROME_BIN=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+          echo "CHROMIUM_BIN=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
       - name: Install Firefox
         id: setup-firefox
         uses: browser-actions/setup-firefox@v1
       - name: Set Firefox Path
         run: |
-          echo "FIREFOX_BIN=${{ steps.setup-firefox.outputs.firefox_path }}" >> $GITHUB_ENV
+          echo "FIREFOX_BIN=${{ steps.setup-firefox.outputs.firefox-path }}" >> $GITHUB_ENV
           echo "MOZ_HEADLESS=1" >> $GITHUB_ENV
       - name: Change Permissions
         run: chmod +x ./gradlew
@@ -175,7 +175,7 @@ jobs:
         uses: PavanMudigonda/jacoco-reporter@v5.1
         with:
           coverage_results_path: build/jacoco.xml
-          coverage_report_name: Code Coverage
+          coverage_report_name: Code Coverage (${{ matrix.name }})
           github_token: ${{ secrets.GITHUB_TOKEN }}
           skip_check_run: false
           minimum_coverage: 85
