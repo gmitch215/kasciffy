@@ -91,11 +91,12 @@ jobs:
         if: success() || failure()
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifact
+          name: build-artifact-${{ matrix.name }}-${{ github.sha }}
           path: |
             core/build/bin/
             core/build/libs/
             cli/build/bin/
+          overwrite: true
       - name: Stop Gradle Daemon
         run: ./gradlew --stop
 
@@ -118,7 +119,7 @@ jobs:
             os: macos-15
           - name: windows-x64
             os: windows-2025
-          - nane: linux-x64
+          - name: linux-x64
             os: ubuntu-24.04
 
     name: Test Project / ${{ matrix.name }}
@@ -166,7 +167,7 @@ jobs:
         if: success() || failure()
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
+          name: test-report-${{ matrix.name }}-${{ github.sha }}
           path: "*/build/reports/tests/"
       - name: Collect JaCoCo Report
         if: ${{ github.event_name != 'pull_request' }}
@@ -193,7 +194,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
+          name: coverage-report-${{ matrix.name }}-${{ github.sha }}
           path: "*/coverage-results.md"
       - name: Upload Code Coverage Artifacts (Pull Request)
         if: ${{ github.event_name == 'pull_request' }}
