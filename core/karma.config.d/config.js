@@ -16,7 +16,8 @@ config.plugins.push("karma-detect-browsers");
 
 // set timeout (30s)
 config.set({
-    browserDisconnectTimeout: 30000
+    browserDisconnectTimeout: 30000,
+    processKillTimeout: 30000
 })
 
 // include .png files
