@@ -33,6 +33,13 @@ class ImageNative internal constructor(
 
     override fun asciffySync(map: String, downScale: Int?): ImageNative = runBlocking { asciffy(map, downScale) }
 
+    /**
+     * Writes this image to the given file.
+     * @param file The file to write the image to.
+     * If the file already exists, it will be overwritten.
+     * If the file does not exist, it will be created.
+     */
+    fun writeToFile(file: String) = write(file)
 }
 
 /**
