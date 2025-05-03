@@ -54,7 +54,6 @@ kotlin {
                     }
 
                     useChromeHeadless()
-                    useChromiumHeadless()
                     useFirefoxHeadless()
                 }
             }
