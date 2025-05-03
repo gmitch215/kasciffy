@@ -6,6 +6,8 @@ import com.github.randy408.libspng.*
 import com.github.tsoding.olive_c.*
 import kotlinx.cinterop.*
 import kotlinx.cinterop.ByteVar
+import platform.posix.F_OK
+import platform.posix.access
 import platform.posix.fclose
 import platform.posix.fopen
 import platform.posix.fwrite
@@ -19,8 +21,10 @@ actual fun Image(file: String): ImageNative = memScoped {
     val extension = file.substringAfterLast('.')
     if (extension != "png") throw IllegalArgumentException("Only PNG files are supported.")
 
-    val png = fopen(file, "rb")!!
-    val ctx = spng_ctx_new(0)!!
+    if (access(file, F_OK) != 0) error("File does not exist: $file")
+
+    val png = fopen(file, "rb") ?: error("Failed to open file: $file")
+    val ctx = spng_ctx_new(0) ?: error("Failed to create SPNG context for file: $file")
 
     spng_set_crc_action(ctx, SPNG_CRC_USE.toInt(), SPNG_CRC_USE.toInt())
     spng_set_chunk_limits(ctx, CHUNK_LIMITS, CHUNK_LIMITS)

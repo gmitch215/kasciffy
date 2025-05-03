@@ -9,6 +9,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.dokka")
     id("com.vanniktech.maven.publish")
+    id("com.goncalossilva.resources")
 
     `maven-publish`
     signing
@@ -107,11 +108,10 @@ kotlin {
 
     targets.filterIsInstance<KotlinNativeTarget>().forEach { target ->
         target.binaries {
-//            https://youtrack.jetbrains.com/issue/KT-76881/Cant-Create-Native-Binaries-with-CInterop-Libraries
             val isDebug = version.toString().contains("SNAPSHOT")
 
             getByName("debugTest").apply {
-                linkerOpts("-lz")
+                linkerOpts("-lz", "-lm", "-v")
             }
 
             staticLib(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
