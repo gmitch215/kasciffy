@@ -1,8 +1,11 @@
+import com.goncalossilva.useanybrowser.useAnyBrowser
 import com.vanniktech.maven.publish.SonatypeHost
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig.Mode
+import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 plugins {
     kotlin("multiplatform")
@@ -48,17 +51,12 @@ kotlin {
             testTask {
                 useKarma {
                     useSourceMapSupport()
-
-                    compilation.dependencies {
-                        implementation(npm("karma-detect-browsers", "^2.3"))
-                    }
-
-                    useChromeHeadless()
-                    useFirefoxHeadless()
+                    useAnyBrowser()
                 }
             }
         }
 
+        yarn.yarnLockAutoReplace = true
         binaries.library()
         binaries.executable()
         generateTypeScriptDefinitions()

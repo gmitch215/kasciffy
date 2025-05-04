@@ -16,6 +16,7 @@ config.plugins.push("karma-detect-browsers");
 
 // set timeout (30s)
 config.set({
+    browserNoActivityTimeout: 30000,
     browserDisconnectTimeout: 30000,
     processKillTimeout: 30000
 })
