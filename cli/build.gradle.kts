@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
 
-    application
     jacoco
 }
 
@@ -59,4 +58,15 @@ fun KotlinMultiplatformExtension.configureSourceSets() {
                 progressiveMode = true
             }
         }
+}
+
+java {
+    manifest {
+        attributes(
+            "Main-Class" to "dev.gmitch215.kasciffy.cli.KasciffyMain",
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to project.version,
+            "Implementation-Vendor" to "gmitch215"
+        )
+    }
 }

@@ -1,3 +1,5 @@
+@file:JvmName("KasciffyMain")
+
 package dev.gmitch215.kasciffy.cli
 
 import com.github.ajalt.clikt.command.SuspendingCliktCommand
@@ -7,17 +9,15 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
-import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.int
 import dev.gmitch215.kasciffy.api.FIVE
 import dev.gmitch215.kasciffy.api.Image
 import dev.gmitch215.kasciffy.api.asciffyAsString
-import korlibs.io.file.VfsOpenMode
 import korlibs.io.file.std.localCurrentDirVfs
-import korlibs.io.stream.writeBytes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.runBlocking
+import kotlin.jvm.JvmName
 
 class Kasciffy : SuspendingCliktCommand(name = "kasciffy") {
     override val printHelpOnEmptyArgs: Boolean = true
