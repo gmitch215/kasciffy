@@ -50,6 +50,10 @@
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector common-like" data-active=""
+                        data-filter=":kasciffy-core/commonMain">common</button>
+                <button class="platform-tag platform-selector native-like" data-active=""
+                        data-filter=":kasciffy-core/mingwMain">mingw</button>
+                <button class="platform-tag platform-selector common-like" data-active=""
                         data-filter=":kasciffy-core/nativeMain">native</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
@@ -65,6 +69,22 @@
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kasciffy-core/commonMain"
+                                       data-filter=":kasciffy-core/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option native-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kasciffy-core/mingwMain"
+                                       data-filter=":kasciffy-core/mingwMain"/>
+                                <span class="checkbox--icon"></span>
+                                mingw
+                            </label>
+                        </li>
                         <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
                             <label class="checkbox">
                                 <input type="checkbox" class="checkbox--input" id=":kasciffy-core/nativeMain"
@@ -113,7 +133,7 @@
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">ImageNative</a> : <a href="../-image/index.html">Image</a></div><p class="paragraph">The Native implementation of the <a href="../-image/index.html">Image</a> interface.</p></div>    </div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
     <div class="tabs-section-body">
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
@@ -130,23 +150,6 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="creation-date.html">creationDate</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The creation date of this piece of media, in milliseconds past the Unix Epoch.</p></div></div>                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="1839365060%2FProperties%2F-1453317777" anchor-label="ctxPointer" id="1839365060%2FProperties%2F-1453317777" data-filterable-set=":kasciffy-core/nativeMain"></a>
-          <div class="table-row" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="ctx-pointer.html"><span>ctx</span><wbr></wbr><span><span>Pointer</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1839365060%2FProperties%2F-1453317777"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="ctx-pointer.html">ctxPointer</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlinx.cinterop/-c-pointer/index.html">CPointer</a><span class="token operator">&lt;</span><span data-unresolved-link="spng/spng_ctx///PointingToDeclaration/">spng_ctx</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The pointer to the <span data-unresolved-link="spng/spng_ctx///PointingToDeclaration/">spng_ctx</span> object.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -181,23 +184,6 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="height.html">height</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The height of the piece of media.</p></div></div>                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="-985804403%2FProperties%2F-1453317777" anchor-label="ihdr" id="-985804403%2FProperties%2F-1453317777" data-filterable-set=":kasciffy-core/nativeMain"></a>
-          <div class="table-row" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="ihdr.html"><span><span>ihdr</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-985804403%2FProperties%2F-1453317777"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="ihdr.html">ihdr</a><span class="token operator">: </span><span data-unresolved-link="spng/spng_ihdr///PointingToDeclaration/">spng_ihdr</span></div><div class="brief "><p class="paragraph">The <span data-unresolved-link="spng/spng_ihdr///PointingToDeclaration/">spng_ihdr</span> object.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -303,7 +289,39 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="asciffy.html"><span class="token function">asciffy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">downScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-image/index.html">Image</a></div><div class="brief "><p class="paragraph">Asynchronously Asciffies this piece of media.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="asciffy.html"><span class="token function">asciffy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">downScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ImageNative</a></div><div class="brief "><p class="paragraph">Asynchronously Asciffies this piece of media.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1283843720%2FFunctions%2F-1796385387" anchor-label="asciffy0" id="-1283843720%2FFunctions%2F-1796385387" data-filterable-set=":kasciffy-core/mingwMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kasciffy-core/mingwMain" data-filterable-set=":kasciffy-core/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../asciffy0.html"><span><span>asciffy0</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1283843720%2FFunctions%2F-1796385387"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/mingwMain" data-filterable-set=":kasciffy-core/mingwMain" data-active="" data-toggle=":kasciffy-core/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/mingwMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="index.html">ImageNative</a><span class="token punctuation">.</span><a href="../asciffy0.html"><span class="token function">asciffy0</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">downScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ImageNative</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="482692690%2FFunctions%2F1291987183" anchor-label="asciffyAsString" id="482692690%2FFunctions%2F1291987183" data-filterable-set=":kasciffy-core/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kasciffy-core/commonMain" data-filterable-set=":kasciffy-core/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../asciffy-as-string.html"><span>asciffy</span><wbr></wbr><span>As</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="482692690%2FFunctions%2F1291987183"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../-image/index.html">Image</a><span class="token punctuation">.</span><a href="../asciffy-as-string.html"><span class="token function">asciffyAsString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">downScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Asynchronously asciffies this image.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -320,7 +338,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="asciffy-sync.html"><span class="token function">asciffySync</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">downScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-image/index.html">Image</a></div><div class="brief "><p class="paragraph">Synchronously Asciffies this piece of media.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="asciffy-sync.html"><span class="token function">asciffySync</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">downScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ImageNative</a></div><div class="brief "><p class="paragraph">Synchronously Asciffies this piece of media.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -342,19 +360,19 @@
               </div>
             </div>
           </div>
-<a data-name="-759151122%2FFunctions%2F-1453317777" anchor-label="free" id="-759151122%2FFunctions%2F-1453317777" data-filterable-set=":kasciffy-core/nativeMain"></a>
-          <div class="table-row" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain">
+<a data-name="1814026261%2FFunctions%2F720277894" anchor-label="free" id="1814026261%2FFunctions%2F720277894" data-filterable-set=":kasciffy-core/nativeMain,:kasciffy-core/mingwMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kasciffy-core/nativeMain,:kasciffy-core/mingwMain" data-filterable-set=":kasciffy-core/nativeMain,:kasciffy-core/mingwMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="free.html"><span><span>free</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-759151122%2FFunctions%2F-1453317777"></span>
+                  <div><a href="../free.html"><span><span>free</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1814026261%2FFunctions%2F720277894"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="free.html"><span class="token function">free</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Frees the <span data-unresolved-link="spng/spng_ctx///PointingToDeclaration/">spng_ctx</span> pointer.</p></div></div>                  </div>
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/mingwMain" data-filterable-set=":kasciffy-core/mingwMain" data-active="" data-toggle=":kasciffy-core/mingwMain">mingw</button><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-toggle=":kasciffy-core/nativeMain">native</button></div>
+<div class="content sourceset-dependent-content" data-togglable=":kasciffy-core/mingwMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="index.html">ImageNative</a><span class="token punctuation">.</span><a href="../free.html"><span class="token function">free</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div><div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="index.html">ImageNative</a><span class="token punctuation">.</span><a href="../free.html"><span class="token function">free</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Frees the resources used by this image. This is called when the image is no longer needed.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -423,6 +441,40 @@
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
 <div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-image/to2-d-array.html"><span class="token function">to2DArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Converts this image as a 2D array of pixel colors in RGBA format.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1445813840%2FFunctions%2F720277894" anchor-label="write" id="1445813840%2FFunctions%2F720277894" data-filterable-set=":kasciffy-core/nativeMain,:kasciffy-core/mingwMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kasciffy-core/nativeMain,:kasciffy-core/mingwMain" data-filterable-set=":kasciffy-core/nativeMain,:kasciffy-core/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../write.html"><span><span>write</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1445813840%2FFunctions%2F720277894"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/mingwMain" data-filterable-set=":kasciffy-core/mingwMain" data-active="" data-toggle=":kasciffy-core/mingwMain">mingw</button><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-toggle=":kasciffy-core/nativeMain">native</button></div>
+<div class="content sourceset-dependent-content" data-togglable=":kasciffy-core/mingwMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="index.html">ImageNative</a><span class="token punctuation">.</span><a href="../write.html"><span class="token function">write</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div><div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="index.html">ImageNative</a><span class="token punctuation">.</span><a href="../write.html"><span class="token function">write</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Writes this image to the given file.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="270176730%2FFunctions%2F-1453317777" anchor-label="writeToFile" id="270176730%2FFunctions%2F-1453317777" data-filterable-set=":kasciffy-core/nativeMain"></a>
+          <div class="table-row" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="write-to-file.html"><span>write</span><wbr></wbr><span>To</span><wbr></wbr><span><span>File</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="270176730%2FFunctions%2F-1453317777"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kasciffy-core/nativeMain" data-filterable-set=":kasciffy-core/nativeMain" data-active="" data-toggle=":kasciffy-core/nativeMain">native</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kasciffy-core/nativeMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="write-to-file.html"><span class="token function">writeToFile</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Writes this image to the given file.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
