@@ -120,7 +120,7 @@ jobs:
           - name: windows-x64
             os: windows-2025
           - name: linux-x64
-            os: ubuntu-24.04
+            os: ubuntu-22.04
 
     name: Test Project / ${{ matrix.name }}
     steps:
