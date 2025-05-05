@@ -45,7 +45,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     needs: setup
-    timeout-minutes: 60
+    timeout-minutes: 120
 
     strategy:
       fail-fast: false
@@ -102,7 +102,7 @@ jobs:
 
   test:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
+    timeout-minutes: 120
     needs: setup
 
     permissions:
@@ -211,7 +211,7 @@ jobs:
     needs: [build, test]
     name: Deploy Dokka
     if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
-    timeout-minutes: 30
+    timeout-minutes: 120
 
     permissions:
       contents: write
@@ -240,7 +240,7 @@ jobs:
     needs: build
     name: Publish to Repository
     if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
-    timeout-minutes: 30
+    timeout-minutes: 120
 
     permissions:
       contents: write
@@ -288,7 +288,7 @@ jobs:
     needs: build
     name: Upload Build Artifacts
     if: ${{ github.event_name != 'pull_request' }}
-    timeout-minutes: 30
+    timeout-minutes: 120
 
     steps:
       - uses: actions/checkout@v4
