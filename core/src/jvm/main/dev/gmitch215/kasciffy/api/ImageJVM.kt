@@ -58,7 +58,7 @@ class ImageJVM internal constructor(
      * If not specified, this is automatically calculated.
      * @return The asciffied version of this piece of media.
      */
-    suspend fun asciffy(map: String, downScale: Int?): Image {
+    suspend fun asciffy(map: String, downScale: Int? = null): Image {
         val asciffied = toPNG(asciffy0(this, map, downScale))
         return ImageJVM(name, extension, creationDate, asciffied)
     }

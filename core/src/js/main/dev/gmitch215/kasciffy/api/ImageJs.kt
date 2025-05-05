@@ -47,13 +47,28 @@ class ImageJS internal constructor(
     fun toDataURL(): String = canvas.toDataURL("image/$extension")
 
     /**
+     * Converts this image to a [Blob].
+     * @return A promise that resolves to the [Blob] representation of this image.
+     */
+    fun toBlob(): Promise<Blob> = Promise { resolve, reject ->
+        canvas.toBlob({ blob ->
+            if (blob != null) {
+                resolve(blob)
+            } else {
+                reject(Error("Failed to convert canvas to blob"))
+            }
+        })
+    }
+
+    /**
      * Asynchronously Asciffies this piece of media.
      * @param map The ASCII map to use for asciffying.
      * @param downScale The downscale factor to use when asciffying. This is used to reduce the size of the media, if necessary.
-     * If not specified, this is automatically calculated.
+     * If not specified, this is automatically calculated. On JavaScript, it is recommended to use a value of 2 or higher compared to
+     * on the JVM.
      * @return The asciffied version of this piece of media as a JavaScript promise.
      */
-    fun asciffy(map: String, downScale: Int? = null): Promise<ImageJS> = GlobalScope.promise {
+    fun asciffy(map: String, downScale: Int? = 2): Promise<ImageJS> = GlobalScope.promise {
         val asciffied = asciffy0(this@ImageJS, map, downScale)
         val canvas = toCanvas(asciffied, spaced = true, fontName = "Monospace", fontSize = 12)
         return@promise ImageJS(name, extension, creationDateDouble = creationDateDouble, canvas = canvas)
@@ -144,7 +159,7 @@ fun Image(binary: ByteArray, type: String): Promise<ImageJS> {
 internal fun toCanvas(output: String, spaced: Boolean = true, fontName: String = "Monospace", fontSize: Int = 12): HTMLCanvasElement {
     val canvas = document.createElement("canvas") as HTMLCanvasElement
     val ctx = canvas.getContext("2d") as CanvasRenderingContext2D
-    ctx.font = "$fontSize}px $fontName"
+    ctx.font = "${fontSize}px $fontName"
 
     val lines = output.split("\n")
     val lineHeight = fontSize * 1.2
