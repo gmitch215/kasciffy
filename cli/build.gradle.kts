@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     kotlin("multiplatform")
@@ -32,7 +33,9 @@ kotlin {
 
     targets.filterIsInstance<KotlinNativeTarget>().forEach { target ->
         target.binaries {
-            executable {
+            val isDebug = version.toString().contains("SNAPSHOT")
+
+            executable(listOf(if (isDebug) NativeBuildType.DEBUG else NativeBuildType.RELEASE)) {
                 baseName = "kasciffy"
                 entryPoint = "dev.gmitch215.kasciffy.cli.main"
             }
