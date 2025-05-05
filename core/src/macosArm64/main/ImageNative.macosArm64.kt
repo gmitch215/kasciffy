@@ -144,7 +144,7 @@ actual fun ImageNative.write(file: String): Unit = memScoped {
     fclose(file)
 }
 
-actual suspend fun ImageNative.asciffy0(map: String, downScale: Int?): ImageNative {
+internal actual suspend fun ImageNative.asciffy0(map: String, downScale: Int?): ImageNative {
     val canvas = toCanvas(asciffy0(this, map, downScale))
     val (ctx, ihdr) = toSpngContents(canvas) ?: throw IllegalStateException("Failed to convert canvas to SPNG contents")
 
