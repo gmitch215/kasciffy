@@ -8,7 +8,7 @@ import kotlin.js.JsExport
  */
 @OptIn(ExperimentalJsExport::class)
 @JsExport
-interface Image : Media {
+interface Image : Media, Iterable<Int> {
 
     /**
      * Gets the pixel color at specified coordinates in RGBA form.
@@ -28,6 +28,20 @@ interface Image : Media {
         for (x in 0..width)
             for (y in 0..height)
                 array[x][y] = get(x, y)
+
+        return array
+    }
+
+    /**
+     * Converts this image as a 1D array of pixel colors in RGBA format.
+     * @return This image as a 1D Integer Array
+     */
+    fun toArray(): IntArray {
+        val array = IntArray(width * height)
+
+        for (x in 0 until width)
+            for (y in 0 until height)
+                array[x * height + y] = get(x, y)
 
         return array
     }
@@ -75,6 +89,8 @@ interface Image : Media {
         val pixel = get(x, y)
         return pixel and 0xFF
     }
+
+    override fun iterator(): Iterator<Int> = toArray().iterator()
 
     override fun asciffySync(map: String, downScale: Int?): Image
 }
