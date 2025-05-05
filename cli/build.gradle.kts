@@ -19,9 +19,9 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":kasciffy-core"))
-            implementation("com.github.ajalt.clikt:clikt:5.0.3")
-            implementation("com.soywiz:korlibs-io:6.0.1")
+            api(project(":kasciffy-core"))
+            api("com.github.ajalt.clikt:clikt:5.0.3")
+            api("com.soywiz:korlibs-io:6.0.1")
         }
 
         commonTest.dependencies {
