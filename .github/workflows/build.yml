@@ -198,7 +198,7 @@ jobs:
           path: "*/coverage-results.md"
       - name: Upload Code Coverage Artifacts (Pull Request)
         if: ${{ github.event_name == 'pull_request' }}
-        uses: madrapps/jacoco-report@v1.7.1
+        uses: madrapps/jacoco-report@v1.7.2
         with:
           paths: build/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
