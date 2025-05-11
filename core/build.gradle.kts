@@ -108,6 +108,7 @@ kotlin {
             val isDebug = version.toString().contains("SNAPSHOT")
 
             getByName("debugTest").apply {
+                debuggable = true
                 linkerOpts("-lz", "-lm", "-v")
             }
 

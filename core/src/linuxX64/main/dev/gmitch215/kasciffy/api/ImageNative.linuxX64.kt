@@ -44,10 +44,8 @@ internal fun MemScope.Image(name: String, extension: String, creationDate: Long,
     val size = nativeHeap.alloc<ULongVar>()
     if (spng_decoded_image_size(ctx, SPNG_FMT_RGBA8.toInt(), size.ptr) != 0) return null
 
-    val data = ByteArray(size.value.toInt())
-    data.usePinned { pinned ->
-        if (spng_decode_image(ctx, pinned.addressOf(0), size.value, SPNG_FMT_RGBA8.toInt(), 0) != 0) return null
-    }
+    val data = nativeHeap.allocArray<ByteVar>(size.value.toLong())
+    if (spng_decode_image(ctx, data, size.value, SPNG_FMT_RGBA8.toInt(), 0) != 0) return null
 
     val rgbValues = Array(ihdr.height.toInt()) { IntArray(ihdr.width.toInt()) }
     for (y in 0 until ihdr.height.toInt())
@@ -64,13 +62,11 @@ internal fun MemScope.Image(name: String, extension: String, creationDate: Long,
 
 internal fun toCanvas(output: String, spaced: Boolean = true, fontSize: Int = 12): CValue<Olivec_Canvas> = memScoped {
     val lines = output.split("\n")
-    val width = lines[0].toInt() * (if (spaced) 2 else 1) * OLIVEC_DEFAULT_FONT_HEIGHT
+    val width = lines[0].count() * (if (spaced) 2 else 1) * OLIVEC_DEFAULT_FONT_HEIGHT
     val height = lines.size * OLIVEC_DEFAULT_FONT_HEIGHT
 
-    val pixels = UIntArray(width * height)
-    val oc = pixels.usePinned { pinned ->
-        olivec_canvas(pinned.addressOf(0), width.toULong(), height.toULong(), width.toULong())
-    }
+    val pixels = nativeHeap.allocArray<UIntVar>(width * height)
+    val oc = olivec_canvas(pixels, width.toULong(), height.toULong(), width.toULong())
     olivec_fill(oc, 0xFF000000.toUInt())
 
     for ((index, line) in lines.withIndex()) {
@@ -87,18 +83,22 @@ internal fun toSpngContents(canvas: CValue<Olivec_Canvas>): Pair<CPointer<spng_c
         val width = width.toInt()
         val height = height.toInt()
 
+        if (width <= 0) throw IllegalArgumentException("Invalid width: $width")
+        if (height <= 0) throw IllegalArgumentException("Invalid height: $height")
+
         val size = width * height * 4
         val buffer = allocArray<ByteVar>(size)
-        val rowStride = width * 4
 
         for (y in 0 until height) {
             for (x in 0 until width) {
-                val argb = pixels0[y * rowStride + x]
+                val i = y * width + x
+                val argb = pixels0[i]
 
-                buffer[y * rowStride + x] = (argb shr 16).toByte() // R
-                buffer[y * rowStride + x + 1] = (argb shr 8).toByte() // G
-                buffer[y * rowStride + x + 2] = argb.toByte() // B
-                buffer[y * rowStride + x + 3] = (argb shr 24).toByte() // A
+                val j = (y * width + x) * 4
+                buffer[j + 0] = (argb shr 16).toByte() // R
+                buffer[j + 1] = (argb shr 8).toByte()  // G
+                buffer[j + 2] = argb.toByte()          // B
+                buffer[j + 3] = (argb shr 24).toByte() // A
             }
         }
 
@@ -135,10 +135,9 @@ actual fun ImageNative.write(file: String): Unit = memScoped {
     val ctx = imageToPointer["$name-$extension-$creationDate"] ?: throw IllegalStateException("Image not found in pointer map")
 
     val file = fopen(file, "wb")
-    val len = alloc<ULongVar>()
-    val buffer = spng_get_png_buffer(ctx, len.ptr, null)
+    if (file == null) throw IllegalStateException("Failed to open file: $file")
 
-    fwrite(buffer, len.value, 1.toULong(), file)
+    spng_set_png_file(ctx, file)
     fclose(file)
 }
 
@@ -149,12 +148,15 @@ internal actual suspend fun ImageNative.asciffy0(map: String, downScale: Int?): 
     val rgbValues = canvas.useContents {
         val height0 = height.toInt()
         val width0 = width.toInt()
-        val pixels0 = pixels ?: return@useContents null
+        val pixels0 = pixels?.reinterpret<UIntVar>() ?: return@useContents null
 
         val arr = Array(height0) { IntArray(width0) }
         for (y in 0 until height0) {
             for (x in 0 until width0) {
-                val argb = pixels0[y * (width0 * 4) + x]
+                val i = y * width0 + x
+                if (i >= width0 * height0) throw AssertionError("Index out of bounds: $i >= ${width0 * height0}")
+
+                val argb = pixels0[i]
                 arr[y][x] = argb.toInt()
             }
         }
