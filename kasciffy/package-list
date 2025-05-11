@@ -34,8 +34,6 @@ $dokka.location:dev.gmitch215.kasciffy.api//TWELVE/#/PointingToDeclaration/kasc
 $dokka.location:dev.gmitch215.kasciffy.api//TWENTY/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-t-w-e-n-t-y.html
 $dokka.location:dev.gmitch215.kasciffy.api//TWO/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-t-w-o.html
 $dokka.location:dev.gmitch215.kasciffy.api//TWO_BLOCK/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-t-w-o_-b-l-o-c-k.html
-$dokka.location:dev.gmitch215.kasciffy.api//asciffy0/[Error type: Unresolved type for ImageNative]#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/asciffy0.html
-$dokka.location:dev.gmitch215.kasciffy.api//asciffy0/dev.gmitch215.kasciffy.api.ImageNative#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/asciffy0.html
 $dokka.location:dev.gmitch215.kasciffy.api//asciffyAsString/dev.gmitch215.kasciffy.api.AnimatedMedia#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/asciffy-as-string.html
 $dokka.location:dev.gmitch215.kasciffy.api//asciffyAsString/dev.gmitch215.kasciffy.api.Image#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/asciffy-as-string.html
 $dokka.location:dev.gmitch215.kasciffy.api//free/[Error type: Unresolved type for ImageNative]#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/free.html
@@ -74,8 +72,10 @@ $dokka.location:dev.gmitch215.kasciffy.api/Image/asciffySync/#kotlin.String#kotl
 $dokka.location:dev.gmitch215.kasciffy.api/Image/blue/#kotlin.Int#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image/blue.html
 $dokka.location:dev.gmitch215.kasciffy.api/Image/get/#kotlin.Int#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image/get.html
 $dokka.location:dev.gmitch215.kasciffy.api/Image/green/#kotlin.Int#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image/green.html
+$dokka.location:dev.gmitch215.kasciffy.api/Image/iterator/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image/iterator.html
 $dokka.location:dev.gmitch215.kasciffy.api/Image/red/#kotlin.Int#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image/red.html
 $dokka.location:dev.gmitch215.kasciffy.api/Image/to2DArray/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image/to2-d-array.html
+$dokka.location:dev.gmitch215.kasciffy.api/Image/toArray/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image/to-array.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS///PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/index.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/asciffy/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/asciffy.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/asciffySync/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/asciffy-sync.html
@@ -85,6 +85,7 @@ $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/extension/#/PointingToDeclara
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/get/#kotlin.Int#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/get.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/height/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/height.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/name/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/name.html
+$dokka.location:dev.gmitch215.kasciffy.api/ImageJS/toBlob/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/to-blob.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/toDataURL/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/to-data-u-r-l.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJS/width/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-s/width.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageJVM///PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-j-v-m/index.html
