@@ -88,6 +88,11 @@ kotlin {
             implementation("ws.schild:jave-all-deps:3.5.0")
         }
 
+        jsMain.dependencies {
+            implementation(npm("gif.js.optimized", "1.0.1"))
+            implementation(npm("gifuct-js", "2.1.2"))
+        }
+
         // Native Libraries
         mapOf(
             mingwX64Main to "mingwx64",

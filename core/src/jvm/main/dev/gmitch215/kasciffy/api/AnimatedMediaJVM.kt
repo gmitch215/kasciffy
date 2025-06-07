@@ -1,5 +1,6 @@
 package dev.gmitch215.kasciffy.api
 
+import dev.gmitch215.kasciffy.api.Media.Companion.UNNAMED_MEDIA_NAME
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -139,7 +140,7 @@ fun AnimatedImage(input: InputStream): AnimatedImageJVM {
 
     val fps = if (totalDuration > 0) (frames.size / (totalDuration / 1000.0)).toInt() else 0
 
-    return AnimatedImageJVM("Unknown", "gif", System.currentTimeMillis(), fps, frames)
+    return AnimatedImageJVM(UNNAMED_MEDIA_NAME, "gif", System.currentTimeMillis(), fps, frames)
 }
 
 /**

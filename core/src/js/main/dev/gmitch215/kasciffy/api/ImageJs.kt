@@ -2,6 +2,7 @@
 
 package dev.gmitch215.kasciffy.api
 
+import dev.gmitch215.kasciffy.api.Media.Companion.UNNAMED_MEDIA_NAME
 import kotlinx.browser.document
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -26,7 +27,7 @@ class ImageJS internal constructor(
     @Deprecated(message = "JS does not support 64-bit creation dates as an integer", replaceWith = ReplaceWith("creationDateDouble"))
     override val creationDate: Long = -1,
     val creationDateDouble: Double,
-    private val canvas: HTMLCanvasElement
+    internal val canvas: HTMLCanvasElement
 ) : Image {
     override val width: Int
         get() = canvas.width
@@ -117,7 +118,7 @@ fun Image(url: String, extension: String): Promise<ImageJS> {
             canvas.width = img.width
             canvas.height = img.height
             ctx.drawImage(img, 0.0, 0.0)
-            resolve(ImageJS("Unknown", extension, creationDateDouble = Date.now(), canvas = canvas))
+            resolve(ImageJS(UNNAMED_MEDIA_NAME, extension, creationDateDouble = Date.now(), canvas = canvas))
         }
         img.onerror = { _, _, _, _, _ -> reject(Error("Failed to load image: $url")) }
     }
@@ -154,6 +155,23 @@ fun Image(blob: Blob, extension: String): Promise<ImageJS> {
 fun Image(binary: ByteArray, type: String): Promise<ImageJS> {
     val blob = Blob(arrayOf(binary.asDynamic()), BlobPropertyBag(type))
     return Image(blob, type.substringAfter("/"))
+}
+
+/**
+ * Creates an Image from the given [HTMLCanvasElement].
+ * @param canvas The canvas to create the image from.
+ * @param type The MIME type of the image (e.g. "image/png").
+ * @return The created Image.
+ */
+@JsExport
+@JsName("ImageFromCanvas")
+fun Image(canvas: HTMLCanvasElement, type: String): ImageJS {
+    return ImageJS(
+        name = UNNAMED_MEDIA_NAME,
+        extension = type.substringAfter("/"),
+        creationDateDouble = Date.now(),
+        canvas = canvas
+    )
 }
 
 internal fun toCanvas(output: String, spaced: Boolean = true, fontName: String = "Monospace", fontSize: Int = 12): HTMLCanvasElement {

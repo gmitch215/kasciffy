@@ -14,19 +14,20 @@ config.set({
 });
 config.plugins.push("karma-detect-browsers");
 
-// set timeout (30s)
+// set timeout (2m)
 config.set({
-    browserNoActivityTimeout: 30000,
-    browserDisconnectTimeout: 30000,
-    processKillTimeout: 30000,
+    browserNoActivityTimeout: 120000,
+    browserDisconnectTimeout: 120000,
+    processKillTimeout: 120000,
     client: {
         mocha: {
-            timeout: 30000
+            timeout: 120000
         }
     }
 })
 
-// include .png files
+// include test resources
 config.files.push(
     { pattern: "**/*.png", included: false, served: true, watched: false },
+    { pattern: "**/*.gif", included: false, served: true, watched: false },
 );

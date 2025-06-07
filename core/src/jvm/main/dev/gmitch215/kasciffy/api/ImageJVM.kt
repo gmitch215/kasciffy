@@ -1,5 +1,6 @@
 package dev.gmitch215.kasciffy.api
 
+import dev.gmitch215.kasciffy.api.Media.Companion.UNNAMED_MEDIA_NAME
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
 import java.awt.Font
@@ -111,7 +112,7 @@ fun Image(name: String, bufferedImage: BufferedImage): ImageJVM {
  * @param bufferedImage The BufferedImage to create the image from.
  * @return The created Image.
  */
-fun Image(bufferedImage: BufferedImage): ImageJVM = Image("Unknown", bufferedImage)
+fun Image(bufferedImage: BufferedImage): ImageJVM = Image(UNNAMED_MEDIA_NAME, bufferedImage)
 
 /**
  * Creates an Image from the given [InputStream].
@@ -124,7 +125,7 @@ fun Image(input: InputStream): ImageJVM {
     if (bufferedImage == null)
         error("Failed to read image from input stream")
 
-    return Image("Unknown", bufferedImage)
+    return Image(UNNAMED_MEDIA_NAME, bufferedImage)
 }
 
 private fun extension(type: Int): String = when (type) {

@@ -51,4 +51,11 @@ interface Media {
      * @return The asciffied version of this piece of media.
      */
     fun asciffySync(map: String, downScale: Int? = null): Media
+
+    companion object {
+        /**
+         * The default name used for unnamed media.
+         */
+        const val UNNAMED_MEDIA_NAME = "media"
+    }
 }
