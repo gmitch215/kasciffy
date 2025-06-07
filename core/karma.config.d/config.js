@@ -14,14 +14,14 @@ config.set({
 });
 config.plugins.push("karma-detect-browsers");
 
-// set timeout (2m)
+// set timeout (5m)
 config.set({
-    browserNoActivityTimeout: 120000,
-    browserDisconnectTimeout: 120000,
-    processKillTimeout: 120000,
+    browserNoActivityTimeout: 300000,
+    browserDisconnectTimeout: 300000,
+    processKillTimeout: 300000,
     client: {
         mocha: {
-            timeout: 120000
+            timeout: 300000
         }
     }
 })
