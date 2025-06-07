@@ -74,15 +74,15 @@ class AnimatedImageJS internal constructor(
      * @return A promise that resolves to the [Blob] representation of this animated media in GIF format.
      */
     fun toBlob(loop: Int = 0, quality: Int = 10, delayMs: Int = (1000 / fps)): Promise<Blob> = GlobalScope.promise {
-        val gif = GIF(GIFOptions().apply {
-            this.workers = 2
+        val gif = GIF(jsObject {
+            workers = 2
             this.quality = quality
-            this.workerScript = "https://cdn.jsdelivr.net/npm/gif.js.optimized/dist/gif.worker.js"
-            this.repeat = loop
+            workerScript = "https://cdn.jsdelivr.net/npm/gif.js.optimized/dist/gif.worker.js"
+            repeat = loop
         })
 
         for (frame in imageFrames)
-            gif.addFrame(frame.canvas, GIFFrameOptions().apply { delay = delayMs })
+            gif.addFrame(frame.canvas, jsObject { delay = delayMs })
 
         val result = CompletableDeferred<Blob>()
         gif.on("finished") { blob -> result.complete(blob as Blob) }
@@ -105,6 +105,7 @@ class AnimatedImageJS internal constructor(
             val canvas = toCanvas(asciffied, spaced = true, fontName = "Monospace", fontSize = 12)
             ImageJS(frame.name, frame.extension, creationDateDouble = frame.creationDateDouble, canvas = canvas)
         }
+
         AnimatedImageJS(name, extension, creationDateDouble = creationDateDouble, fps = fps, imageFrames = asciffiedFrames)
     }
 }
@@ -202,12 +203,16 @@ internal interface GIFOptions {
     var workerScript: String?
     var repeat: Int?
 }
-internal fun GIFOptions(): GIFOptions = js("{}")
 
 internal interface GIFFrameOptions {
     var delay: Int?
 }
-internal fun GIFFrameOptions(): GIFFrameOptions = js("{}")
+
+fun jsObject(builder: dynamic.() -> Unit): dynamic {
+    val obj = js("{}")
+    builder(obj)
+    return obj
+}
 
 @JsModule("gifuct-js")
 @JsNonModule
