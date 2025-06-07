@@ -8,7 +8,10 @@ $dokka.location:dev.gmitch215.kasciffy.api////PointingToDeclaration/kasciffy/de
 $dokka.location:dev.gmitch215.kasciffy.api//AnimatedImage/#java.io.File/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//AnimatedImage/#java.io.InputStream/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//AnimatedImage/#java.nio.file.Path/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image.html
+$dokka.location:dev.gmitch215.kasciffy.api//AnimatedImage/#kotlin.String#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image.html
+$dokka.location:dev.gmitch215.kasciffy.api//AnimatedImage/#kotlin.String#kotlin.String#kotlin.Double#kotlin.Int#kotlin.collections.List[dev.gmitch215.kasciffy.api.ImageJS]/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//AnimatedImage/#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image.html
+$dokka.location:dev.gmitch215.kasciffy.api//AnimatedImage/#kotlin.collections.List[kotlin.String]#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//BLUE_GRAYSCALE/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-b-l-u-e_-g-r-a-y-s-c-a-l-e.html
 $dokka.location:dev.gmitch215.kasciffy.api//CHUNK_LIMITS/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-c-h-u-n-k_-l-i-m-i-t-s.html
 $dokka.location:dev.gmitch215.kasciffy.api//FIFTEEN/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-f-i-f-t-e-e-n.html
@@ -24,6 +27,7 @@ $dokka.location:dev.gmitch215.kasciffy.api//Image/#kotlin.ByteArray#kotlin.Strin
 $dokka.location:dev.gmitch215.kasciffy.api//Image/#kotlin.String#java.awt.image.BufferedImage/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//Image/#kotlin.String#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//Image/#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/[linux-x64, macos-arm64, macos-x64, mingw]-image.html
+$dokka.location:dev.gmitch215.kasciffy.api//Image/#org.w3c.dom.HTMLCanvasElement#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//Image/#org.w3c.files.Blob#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image.html
 $dokka.location:dev.gmitch215.kasciffy.api//RED_GRAYSCALE/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-r-e-d_-g-r-a-y-s-c-a-l-e.html
 $dokka.location:dev.gmitch215.kasciffy.api//SUPPORTED_TYPES/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-s-u-p-p-o-r-t-e-d_-t-y-p-e-s.html
@@ -38,10 +42,25 @@ $dokka.location:dev.gmitch215.kasciffy.api//asciffyAsString/dev.gmitch215.kascif
 $dokka.location:dev.gmitch215.kasciffy.api//asciffyAsString/dev.gmitch215.kasciffy.api.Image#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/asciffy-as-string.html
 $dokka.location:dev.gmitch215.kasciffy.api//free/[Error type: Unresolved type for ImageNative]#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/free.html
 $dokka.location:dev.gmitch215.kasciffy.api//free/dev.gmitch215.kasciffy.api.ImageNative#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/free.html
+$dokka.location:dev.gmitch215.kasciffy.api//jsObject/#kotlin.Function1[kotlin.Any,kotlin.Unit]/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/js-object.html
 $dokka.location:dev.gmitch215.kasciffy.api//write/[Error type: Unresolved type for ImageNative]#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/write.html
 $dokka.location:dev.gmitch215.kasciffy.api//write/dev.gmitch215.kasciffy.api.ImageNative#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/write.html
 $dokka.location:dev.gmitch215.kasciffy.api/AnimatedImage///PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image/index.html
 $dokka.location:dev.gmitch215.kasciffy.api/AnimatedImage/asciffySync/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image/asciffy-sync.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS///PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/index.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/asciffy/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/asciffy.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/asciffySync/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/asciffy-sync.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/creationDate/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/creation-date.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/creationDateDouble/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/creation-date-double.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/extension/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/extension.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/fps/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/fps.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/frames/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/frames.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/get/#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/get.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/height/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/height.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/name/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/name.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/toBlob/#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/to-blob.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/toDataURL/#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/to-data-u-r-l.html
+$dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJS/width/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-s/width.html
 $dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJVM///PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-v-m/index.html
 $dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJVM/asciffy/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-v-m/asciffy.html
 $dokka.location:dev.gmitch215.kasciffy.api/AnimatedImageJVM/asciffySync/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-animated-image-j-v-m/asciffy-sync.html
@@ -111,6 +130,8 @@ $dokka.location:dev.gmitch215.kasciffy.api/ImageNative/name/#/PointingToDeclarat
 $dokka.location:dev.gmitch215.kasciffy.api/ImageNative/rgbValues/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-native/rgb-values.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageNative/width/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-native/width.html
 $dokka.location:dev.gmitch215.kasciffy.api/ImageNative/writeToFile/#kotlin.String/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-image-native/write-to-file.html
+$dokka.location:dev.gmitch215.kasciffy.api/Media.Companion///PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-media/-companion/index.html
+$dokka.location:dev.gmitch215.kasciffy.api/Media.Companion/UNNAMED_MEDIA_NAME/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-media/-companion/-u-n-n-a-m-e-d_-m-e-d-i-a_-n-a-m-e.html
 $dokka.location:dev.gmitch215.kasciffy.api/Media///PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-media/index.html
 $dokka.location:dev.gmitch215.kasciffy.api/Media/asciffySync/#kotlin.String#kotlin.Int?/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-media/asciffy-sync.html
 $dokka.location:dev.gmitch215.kasciffy.api/Media/creationDate/#/PointingToDeclaration/kasciffy/dev.gmitch215.kasciffy.api/-media/creation-date.html
