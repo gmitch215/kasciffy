@@ -60,6 +60,11 @@ jobs:
           - name: linux-x64
             os: ubuntu-22.04
 
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+
     name: Build Project / ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v4
@@ -88,6 +93,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assemble
       - name: Archive Build Artifacts
+        id: archive
         if: success() || failure()
         uses: actions/upload-artifact@v4
         with:
@@ -97,6 +103,12 @@ jobs:
             core/build/libs/
             cli/build/bin/
           overwrite: true
+      - name: Attest Build Artifacts
+        uses: actions/attest-build-provenance@v2
+        if: success() || failure()
+        with:
+          subject-name: build-artifact-${{ matrix.name }}-${{ github.sha }}
+          subject-digest: sha256:${{ steps.archive.outputs.artifact-digest }}
       - name: Stop Gradle Daemon
         run: ./gradlew --stop
 

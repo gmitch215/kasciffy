@@ -1,8 +1,14 @@
 name: Release Project
 on:
-  release:
-    types: [published]
   workflow_dispatch:
+    inputs:
+      changelog:
+        type: string
+        description: 'Changelog to replace the auto-generated one'
+      suffix:
+        type: string
+        description: 'Suffix to append to the version'
+        default: ''
 
 jobs:
   publish:
@@ -94,12 +100,12 @@ jobs:
           configuration: ".github/release.json"
           mode: "HYBRID"
           fromTag: "${{ env.LATEST_TAG }}"
-          toTag: "master"
+          toTag: "${{ github.ref_name }}"
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.VERSION }}
-          name: kasciffy v${{ env.VERSION }}
+          tag_name: v${{ env.VERSION }}${{ github.event.inputs.suffix }}
+          name: kasciffy v${{ env.VERSION }}${{ github.event.inputs.suffix }}
           body: ${{ steps.changelog.outputs.changelog || github.event.inputs.changelog }}
           draft: false
-          prerelease: false
+          prerelease: ${{ github.ref_name != 'master' }}
