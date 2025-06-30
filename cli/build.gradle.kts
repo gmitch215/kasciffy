@@ -22,7 +22,7 @@ kotlin {
         commonMain.dependencies {
             api(project(":kasciffy-core"))
             api("com.github.ajalt.clikt:clikt:5.0.3")
-            api("com.soywiz:korlibs-io:6.0.1")
+            api("com.soywiz:korlibs-io:6.0.2")
         }
 
         commonTest.dependencies {
