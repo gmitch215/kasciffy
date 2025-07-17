@@ -1,10 +1,10 @@
 plugins {
     kotlin("multiplatform") version "2.2.0" apply false
     kotlin("plugin.compose") version "2.2.0" apply false
-    id("com.android.library") version "8.11.0" apply false
+    id("com.android.library") version "8.11.1" apply false
     id("org.jetbrains.dokka") version "2.0.0" apply false
     id("org.jetbrains.compose") version "1.8.2" apply false
-    id("com.vanniktech.maven.publish") version "0.33.0" apply false
+    id("com.vanniktech.maven.publish") version "0.34.0" apply false
     id("com.goncalossilva.useanybrowser") version "0.4.0" apply false
     id("com.goncalossilva.resources") version "0.10.0" apply false
 
