@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.compose") version "1.8.2" apply false
     id("com.vanniktech.maven.publish") version "0.34.0" apply false
     id("com.goncalossilva.useanybrowser") version "0.4.0" apply false
-    id("com.goncalossilva.resources") version "0.10.0" apply false
+    id("com.goncalossilva.resources") version "0.10.1" apply false
 
     `maven-publish`
     jacoco
