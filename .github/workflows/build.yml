@@ -104,7 +104,7 @@ jobs:
             cli/build/bin/
           overwrite: true
       - name: Attest Build Artifacts
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v3
         if: success() || failure()
         with:
           subject-name: build-artifact-${{ matrix.name }}-${{ github.sha }}
